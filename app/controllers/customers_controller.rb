@@ -1,19 +1,21 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: [:show, :update, :destroy]
+  before_action :set_customer, except: [:index, :create]
 
-  # GET /customers
   def index
     @customers = Customer.all
 
     render json: @customers
   end
 
-  # GET /customers/1
   def show
-    render json: @customer
+    begin
+      stripe_customer = Stripe::Customer.retrieve(@customer.stripe_id)
+      render json: stripe_customer.to_json, status: :ok
+    rescue Stripe::StripeError => e
+      render json: e.message, status: :not_found
+    end
   end
 
-  # POST /customers
   def create
     stripe_customer = Stripe::Customer.create(email: customer_params[:email])
     new_customer_params = customer_params.merge(stripe_id: stripe_customer.id)
@@ -25,7 +27,6 @@ class CustomersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /customers/1
   def update
     if @customer.update(customer_params)
       render json: @customer
@@ -34,19 +35,39 @@ class CustomersController < ApplicationController
     end
   end
 
-  # DELETE /customers/1
   def destroy
     @customer.destroy
+  end
+
+  def sources
+    begin
+      stripe_customer = Stripe::Customer.retrieve(@customer.stripe_id)
+      stripe_customer.sources.create(source: customer_params[:source])
+      render status: :created
+    rescue Stripe::StripeError => e
+      render json: e.message, status: :bad_request
+    end
+  end
+
+  def default_sources
+    begin
+      stripe_customer = Stripe::Customer.retrieve(@customer.stripe_id)
+      stripe_customer.default_source = params[:default_source]
+      stripe_customer.save
+      render status: :ok
+    rescue Stripe::StripeError => e
+      render json: e.message, status: :bad_request
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_customer
-      @customer = Customer.find(params[:id])
+      @customer = Customer.find_by(firebase_id: params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def customer_params
-      params.require(:customer).permit(:email, :first_name, :last_name, :firebase_id)
+      params.require(:customer).permit(:email, :first_name, :last_name, :firebase_id, :source)
     end
 end
