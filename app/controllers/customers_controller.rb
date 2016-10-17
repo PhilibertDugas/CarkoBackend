@@ -15,8 +15,9 @@ class CustomersController < ApplicationController
 
   # POST /customers
   def create
-    @customer = Customer.new(customer_params)
-
+    stripe_customer = Stripe::Customer.create(email: customer_params[:email])
+    new_customer_params = customer_params.merge(stripe_id: stripe_customer.id)
+    @customer = Customer.new(new_customer_params)
     if @customer.save
       render json: @customer, status: :created, location: @customer
     else

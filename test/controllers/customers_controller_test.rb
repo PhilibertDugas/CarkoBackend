@@ -12,6 +12,8 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create customer" do
     assert_difference('Customer.count') do
+      Stripe::Customer.expects(:create).returns(stripe_customer)
+
       post customers_url, params: {
         customer: {
           email: @customer.email,
@@ -48,5 +50,11 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response 204
+  end
+
+  private
+
+  def stripe_customer
+    Stripe::Customer.new(id: '1')
   end
 end
