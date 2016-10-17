@@ -1,10 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  email: MyString
-  first_name: MyString
-  last_name: MyString
-  firebase_id: MyString
+  email: philibert.dugas@gmail.com
+  first_name: Philibert
+  last_name: Dugas
+  firebase_id: '1'
 
 two:
   email: MyString

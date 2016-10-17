@@ -49,7 +49,7 @@ class CustomersController < ApplicationController
     end
   end
 
-  def default_sources
+  def default_source
     begin
       stripe_customer = Stripe::Customer.retrieve(@customer.stripe_id)
       stripe_customer.default_source = params[:default_source]

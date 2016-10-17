@@ -3,6 +3,12 @@ require 'test_helper'
 class CustomersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @customer = customers(:one)
+    @stripe_helper = StripeMock.create_test_helper
+    StripeMock.start
+  end
+
+  teardown do
+    StripeMock.stop
   end
 
   test "should get index" do
@@ -12,8 +18,6 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create customer" do
     assert_difference('Customer.count') do
-      Stripe::Customer.expects(:create).returns(stripe_customer)
-
       post customers_url, params: {
         customer: {
           email: @customer.email,
@@ -28,13 +32,14 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "#show retrieves the stripe information" do
-    Stripe::Customer.expects(:retrieve).returns(stripe_customer)
+    id = Stripe::Customer.create(email: @customer.email).id
+    @customer.update!(stripe_id: id)
     get customer_url(@customer.firebase_id), as: :json
     assert_response :success
   end
 
   test "#show return not found when stripe has an error" do
-    Stripe::Customer.expects(:retrieve).raises(Stripe::StripeError.new('Customer invalid'))
+    StripeMock.prepare_error(Stripe::StripeError.new("Customer not found"), :get_customer)
     get customer_url(@customer.firebase_id), as: :sjon
     assert_response :not_found
   end
@@ -59,9 +64,41 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
     assert_response 204
   end
 
-  private
+  test "#sources adds a source to the customer" do
+    id = Stripe::Customer.create(email: @customer.email).id
+    @customer.update!(stripe_id: id)
+    post sources_customer_url(@customer.firebase_id), params: {
+      customer: { source: @stripe_helper.generate_card_token }
+    }
+    assert_response :created
+  end
 
-  def stripe_customer
-    customer = Stripe::Customer.new(id: '1')
+  test "#sources returns bad request when there is a invalid card token" do
+    id = Stripe::Customer.create(email: @customer.email).id
+    @customer.update!(stripe_id: id)
+    StripeMock.prepare_error(Stripe::StripeError.new("Invalid source"), :create_source)
+    post sources_customer_url(@customer.firebase_id), params: {
+      customer: { source: @stripe_helper.generate_card_token }
+    }
+    assert_response :bad_request
+  end
+
+  test "#default_source adds the default source to the customer" do
+    id = Stripe::Customer.create(email: @customer.email).id
+    @customer.update!(stripe_id: id)
+    post default_source_customer_url(@customer.firebase_id), params: {
+      customer: { default_source: @stripe_helper.generate_card_token }
+    }
+    assert_response :ok
+  end
+
+  test "#default_source returns bad request when there is a invalid card token" do
+    id = Stripe::Customer.create(email: @customer.email).id
+    @customer.update!(stripe_id: id)
+    StripeMock.prepare_error(Stripe::StripeError.new("Invalid default source"), :update_customer)
+    post default_source_customer_url(@customer.firebase_id), params: {
+      customer: { source: @stripe_helper.generate_card_token }
+    }
+    assert_response :bad_request
   end
 end
