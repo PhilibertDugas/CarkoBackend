@@ -68,6 +68,6 @@ class CustomersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def customer_params
-      params.require(:customer).permit(:email, :first_name, :last_name, :firebase_id, :source)
+      params.require(:customer).permit(:email, :first_name, :last_name, :firebase_id, :source, :default_source)
     end
 end
