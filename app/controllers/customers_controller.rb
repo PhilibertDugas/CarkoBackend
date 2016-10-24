@@ -39,35 +39,12 @@ class CustomersController < ApplicationController
     @customer.destroy
   end
 
-  def sources
-    begin
-      stripe_customer = Stripe::Customer.retrieve(@customer.stripe_id)
-      stripe_customer.sources.create(source: customer_params[:source])
-      render status: :created
-    rescue Stripe::StripeError => e
-      render json: e.message, status: :bad_request
-    end
-  end
-
-  def default_source
-    begin
-      stripe_customer = Stripe::Customer.retrieve(@customer.stripe_id)
-      stripe_customer.default_source = params[:default_source]
-      stripe_customer.save
-      render status: :ok
-    rescue Stripe::StripeError => e
-      render json: e.message, status: :bad_request
-    end
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_customer
       @customer = Customer.find_by(firebase_id: params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
     def customer_params
-      params.require(:customer).permit(:email, :first_name, :last_name, :firebase_id, :source, :default_source)
+      params.require(:customer).permit(:email, :first_name, :last_name, :firebase_id)
     end
 end

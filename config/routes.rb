@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
   resources :parkings
   resources :customers do
-    member do
-      post :sources
-      post :default_source
-    end
+    resources :sources, only: [:create], controller: :sources
+    post :default_source, controller: :sources
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :charges, only: [:create]
 end

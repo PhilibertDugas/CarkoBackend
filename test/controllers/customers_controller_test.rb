@@ -17,13 +17,19 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create customer" do
+    customer = Customer.new(
+      email: 'philibert.testing@gmail.com',
+      first_name: 'Philibert',
+      last_name: 'Testing',
+      firebase_id: '2'
+    )
     assert_difference('Customer.count') do
       post customers_url, params: {
         customer: {
-          email: @customer.email,
-          firebase_id: @customer.firebase_id,
-          first_name: @customer.first_name,
-          last_name: @customer.last_name
+          email: customer.email,
+          firebase_id: customer.firebase_id,
+          first_name: customer.first_name,
+          last_name: customer.last_name
         }
       }, as: :json
     end
@@ -62,43 +68,5 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response 204
-  end
-
-  test "#sources adds a source to the customer" do
-    id = Stripe::Customer.create(email: @customer.email).id
-    @customer.update!(stripe_id: id)
-    post sources_customer_url(@customer.firebase_id), params: {
-      customer: { source: @stripe_helper.generate_card_token }
-    }
-    assert_response :created
-  end
-
-  test "#sources returns bad request when there is a invalid card token" do
-    id = Stripe::Customer.create(email: @customer.email).id
-    @customer.update!(stripe_id: id)
-    StripeMock.prepare_error(Stripe::StripeError.new("Invalid source"), :create_source)
-    post sources_customer_url(@customer.firebase_id), params: {
-      customer: { source: @stripe_helper.generate_card_token }
-    }
-    assert_response :bad_request
-  end
-
-  test "#default_source adds the default source to the customer" do
-    id = Stripe::Customer.create(email: @customer.email).id
-    @customer.update!(stripe_id: id)
-    post default_source_customer_url(@customer.firebase_id), params: {
-      customer: { default_source: @stripe_helper.generate_card_token }
-    }
-    assert_response :ok
-  end
-
-  test "#default_source returns bad request when there is a invalid card token" do
-    id = Stripe::Customer.create(email: @customer.email).id
-    @customer.update!(stripe_id: id)
-    StripeMock.prepare_error(Stripe::StripeError.new("Invalid default source"), :update_customer)
-    post default_source_customer_url(@customer.firebase_id), params: {
-      customer: { source: @stripe_helper.generate_card_token }
-    }
-    assert_response :bad_request
   end
 end

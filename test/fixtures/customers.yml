@@ -5,9 +5,3 @@ one:
   first_name: Philibert
   last_name: Dugas
   firebase_id: '1'
-
-two:
-  email: MyString
-  first_name: MyString
-  last_name: MyString
-  firebase_id: MyString
