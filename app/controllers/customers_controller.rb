@@ -8,11 +8,17 @@ class CustomersController < ApplicationController
   end
 
   def show
-    begin
-      stripe_customer = Stripe::Customer.retrieve(@customer.stripe_id)
-      render json: stripe_customer.to_json, status: :ok
-    rescue Stripe::StripeError => e
-      render json: e.message, status: :not_found
+    if params[:type] == 'stripe'
+      begin
+        stripe_customer = Stripe::Customer.retrieve(@customer.stripe_id)
+        render json: stripe_customer.to_json, status: :ok
+      rescue Stripe::StripeError => e
+        render json: e.message, status: :not_found
+      end
+    elsif params[:type] == 'parkings'
+      render json: @customer.parking
+    else
+      render json: @customer
     end
   end
 
@@ -40,11 +46,12 @@ class CustomersController < ApplicationController
   end
 
   private
-    def set_customer
-      @customer = Customer.find_by(firebase_id: params[:id])
-    end
 
-    def customer_params
-      params.require(:customer).permit(:email, :first_name, :last_name, :firebase_id)
-    end
+  def set_customer
+    @customer = Customer.find_by(firebase_id: params[:id])
+  end
+
+  def customer_params
+    params.require(:customer).permit(:email, :first_name, :last_name, :firebase_id)
+  end
 end

@@ -1,21 +1,19 @@
 class ParkingsController < ApplicationController
   before_action :set_parking, only: [:show, :update, :destroy]
 
-  # GET /parkings
   def index
     @parkings = Parking.all
 
     render json: @parkings
   end
 
-  # GET /parkings/1
   def show
     render json: @parking
   end
 
-  # POST /parkings
   def create
-    @parking = Parking.new(parking_params)
+    @parking = Parking.new(parking_params.except(:customer_firebase_id))
+    @parking.customer = Customer.find_by(firebase_id: parking_params[:customer_firebase_id])
 
     if @parking.save
       render json: @parking, status: :created, location: @parking
@@ -24,7 +22,6 @@ class ParkingsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /parkings/1
   def update
     if @parking.update(parking_params)
       render json: @parking
@@ -33,19 +30,26 @@ class ParkingsController < ApplicationController
     end
   end
 
-  # DELETE /parkings/1
   def destroy
     @parking.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_parking
-      @parking = Parking.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def parking_params
-      params.require(:parking).permit(:latitude, :longitude, :photourl, :price, :address, :customer_id)
-    end
+  def set_parking
+    @parking = Parking.find(params[:id])
+  end
+
+  def parking_params
+    params.require(:parking).permit(
+      :latitude,
+      :longitude,
+      :photo_url,
+      :description,
+      :price,
+      :address,
+      :customer_firebase_id,
+      availability_info: [:stop_time, :start_time, :always_available, days_available: []]
+    )
+  end
 end
