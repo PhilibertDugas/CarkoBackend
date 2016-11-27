@@ -3,7 +3,6 @@ class CustomersController < ApplicationController
 
   def index
     @customers = Customer.all
-
     render json: @customers
   end
 
@@ -16,9 +15,9 @@ class CustomersController < ApplicationController
         render json: e.message, status: :not_found
       end
     elsif params[:type] == 'parkings'
-      render json: @customer.parking
+      render json: @customer.parkings
     else
-      render json: @customer
+      render json: @customer.to_json
     end
   end
 

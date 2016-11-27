@@ -12,8 +12,7 @@ class ParkingsController < ApplicationController
   end
 
   def create
-    @parking = Parking.new(parking_params.except(:customer_firebase_id))
-    @parking.customer = Customer.find_by(firebase_id: parking_params[:customer_firebase_id])
+    @parking = Parking.new(parking_params)
 
     if @parking.save
       render json: @parking, status: :created, location: @parking
@@ -48,7 +47,8 @@ class ParkingsController < ApplicationController
       :description,
       :price,
       :address,
-      :customer_firebase_id,
+      :customer_id,
+      :is_available,
       availability_info: [:stop_time, :start_time, :always_available, days_available: []]
     )
   end

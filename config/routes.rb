@@ -5,5 +5,6 @@ Rails.application.routes.draw do
     post :default_source, controller: :sources
   end
 
+  resources :reservations
   resources :charges, only: [:create]
 end

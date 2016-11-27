@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111023901) do
+ActiveRecord::Schema.define(version: 20161127141112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,21 @@ ActiveRecord::Schema.define(version: 20161111023901) do
     t.string   "description"
     t.integer  "customer_id"
     t.json     "availability_info"
+    t.boolean  "is_available"
+    t.index ["customer_id"], name: "index_parking_customer_id", using: :btree
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.boolean  "is_active"
+    t.string   "start_time"
+    t.string   "stop_time"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "customer_id"
+    t.integer  "parking_id"
+    t.float    "total_cost"
+    t.index ["customer_id"], name: "index_customer_id", using: :btree
+    t.index ["parking_id"], name: "index_parking_id", using: :btree
   end
 
   add_foreign_key "parkings", "customers"
