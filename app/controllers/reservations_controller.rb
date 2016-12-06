@@ -45,7 +45,9 @@ class ReservationsController < ApplicationController
       :stop_time,
       :parking_id,
       :customer_id,
-      :total_cost
+      :vehicule_id,
+      :total_cost,
+      :payment_token
     )
   end
 end

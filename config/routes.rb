@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   end
 
   resources :reservations
+  resources :vehicules
   resources :charges, only: [:create]
 end
