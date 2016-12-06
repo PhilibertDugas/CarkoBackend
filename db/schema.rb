@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206011029) do
+ActiveRecord::Schema.define(version: 20161206013429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,13 +47,12 @@ ActiveRecord::Schema.define(version: 20161206011029) do
     t.boolean  "is_active"
     t.string   "start_time"
     t.string   "stop_time"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "customer_id"
     t.integer  "parking_id"
     t.float    "total_cost"
     t.integer  "vehicule_id"
-    t.string   "payment_token"
     t.index ["customer_id"], name: "index_customer_id", using: :btree
     t.index ["parking_id"], name: "index_parking_id", using: :btree
     t.index ["vehicule_id"], name: "index_reservation_vehicule_id", using: :btree
