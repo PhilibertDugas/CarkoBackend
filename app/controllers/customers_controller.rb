@@ -1,10 +1,5 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, except: [:index, :create]
-
-  def index
-    @customers = Customer.all
-    render json: @customers
-  end
+  before_action :set_customer, except: [:create]
 
   def show
     if params[:type] == 'stripe'

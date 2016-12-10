@@ -3,15 +3,9 @@
 one:
   latitude: 1.5
   longitude: 1.5
-  photourl: MyString
-  price: 
-  address: MyString
+  photo_url: "https://google.com"
+  price: 500
+  address: "1160 Rue Villeray"
   customer: one
-
-two:
-  latitude: 1.5
-  longitude: 1.5
-  photourl: MyString
-  price: 
-  address: MyString
-  customer: two
+  is_available: true
+  availability_info: {"stop_time":"23:59","start_time":"00:00","always_available":false,"days_available":[1,1,1,1,1,1,1]}

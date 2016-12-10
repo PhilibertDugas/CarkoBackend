@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  is_active: 
-  start_time: 
-  stop_time: 
-
-two:
-  is_active: 
-  start_time: 
-  stop_time: 
+  is_active: true
+  start_time: '15:56'
+  stop_time: '19:54'
+  parking: one
+  customer: one
+  total_cost: 6.5
+  vehicule_id: 1
+  charge: 'ch_19PHtXJqqElIQmUWR5A3rihg'

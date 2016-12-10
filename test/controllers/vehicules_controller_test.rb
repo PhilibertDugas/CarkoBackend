@@ -12,7 +12,7 @@ class VehiculesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create vehicule" do
     assert_difference('Vehicule.count') do
-      post vehicules_url, params: { vehicule: {  } }, as: :json
+      post vehicules_url, params: @vehicule, as: :json
     end
 
     assert_response 201
@@ -24,7 +24,7 @@ class VehiculesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update vehicule" do
-    patch vehicule_url(@vehicule), params: { vehicule: {  } }, as: :json
+    patch vehicule_url(@vehicule), params: { vehicule: { color: 'red'  } }, as: :json
     assert_response 200
   end
 

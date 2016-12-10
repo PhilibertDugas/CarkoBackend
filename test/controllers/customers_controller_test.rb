@@ -11,11 +11,6 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
     StripeMock.stop
   end
 
-  test "should get index" do
-    get customers_url, as: :json
-    assert_response :success
-  end
-
   test "should create customer" do
     customer = Customer.new(
       email: 'philibert.testing@gmail.com',
@@ -46,7 +41,7 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
 
   test "#show return not found when stripe has an error" do
     StripeMock.prepare_error(Stripe::StripeError.new("Customer not found"), :get_customer)
-    get customer_url(@customer.firebase_id), as: :sjon
+    get customer_url(@customer.firebase_id, type: 'stripe')
     assert_response :not_found
   end
 

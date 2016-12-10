@@ -18,7 +18,7 @@ class ParkingsControllerTest < ActionDispatch::IntegrationTest
           customer_id: @parking.customer_id,
           latitude: @parking.latitude,
           longitude: @parking.longitude,
-          photourl: @parking.photourl,
+          photo_url: @parking.photo_url,
           price: @parking.price
         }
       }, as: :json
@@ -39,7 +39,7 @@ class ParkingsControllerTest < ActionDispatch::IntegrationTest
         customer_id: @parking.customer_id,
         latitude: @parking.latitude,
         longitude: @parking.longitude,
-        photourl: @parking.photourl,
+        photo_url: @parking.photo_url,
         price: @parking.price
       }
     }, as: :json

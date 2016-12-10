@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206013429) do
+ActiveRecord::Schema.define(version: 20161210204240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20161206013429) do
     t.integer  "parking_id"
     t.float    "total_cost"
     t.integer  "vehicule_id"
+    t.string   "charge"
     t.index ["customer_id"], name: "index_customer_id", using: :btree
     t.index ["parking_id"], name: "index_parking_id", using: :btree
     t.index ["vehicule_id"], name: "index_reservation_vehicule_id", using: :btree

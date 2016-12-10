@@ -1,19 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  license_plate: MyString
-  make: MyString
-  model: MyString
-  year: MyString
-  color: MyString
-  province: MyString
-  customer_id:
-
-two:
-  license_plate: MyString
-  make: MyString
-  model: MyString
-  year: MyString
-  color: MyString
-  province: MyString
-  customer_id:
+  license_plate: J90JQJ
+  make: Mazda
+  model: Protege
+  year: 2003
+  color: Blue
+  province: Quebec
+  customer: one
