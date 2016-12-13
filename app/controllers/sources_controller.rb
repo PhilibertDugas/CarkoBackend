@@ -23,11 +23,12 @@ class SourcesController < ApplicationController
   end
 
   private
-    def set_customer
-      @customer = Customer.find_by(firebase_id: params[:customer_id])
-    end
 
-    def customer_params
-      params.require(:customer).permit(:firebase_id, :source, :default_source)
-    end
+  def set_customer
+    @customer = Customer.find_by(firebase_id: params[:customer_id])
+  end
+
+  def customer_params
+    params.require(:customer).permit(:firebase_id, :source, :default_source)
+  end
 end

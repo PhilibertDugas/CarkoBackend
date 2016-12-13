@@ -6,4 +6,8 @@ class Customer < ApplicationRecord
   def as_json(options = {})
     super(include: [:reservations, :parkings, :vehicule])
   end
+
+  def default_account_settings
+    { managed: true }
+  end
 end
