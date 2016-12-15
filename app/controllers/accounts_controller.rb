@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action: :load_customer
+  before_action :load_customer
 
   def create
     begin
