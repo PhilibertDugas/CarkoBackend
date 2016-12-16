@@ -28,7 +28,7 @@ class AccountsController < ApplicationController
   end
 
   def external_params
-    params.requires(:external).permit(:token)
+    params.require(:external).permit(:token)
   end
 
   def account_params
