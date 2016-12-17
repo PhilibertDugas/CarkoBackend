@@ -14,7 +14,8 @@ class AccountsController < ApplicationController
   def external
     begin
       account = Stripe::Account.retrieve(@customer.account_id)
-      account.external_accounts.create(external_account: external_params[:token])
+      external = account.external_accounts.create(external_account: external_params[:token])
+      @customer.update!(bank_last_4_digits: external.last4, bank_name: external.bank_name)
       render :created
     rescue Stripe::StripeError => e
       render json: e.message, status: :bad_request
