@@ -12,12 +12,24 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @reservation = Reservation.new(reservation_params)
+    begin
+      parking = Parking.find_by(id: reservation_params[:parking_id])
+      charge = Charge.new(
+        amount: reservation_params[:charge][:amount],
+        currency: reservation_params[:charge][:currency],
+        customer: reservation_params[:charge][:customer],
+        parking: parking
+      )
+      stripe_charge = charge.save
+      @reservation = Reservation.new(reservation_params.merge(charge: stripe_charge.id))
 
-    if @reservation.save && @reservation.parking.update(is_available: false)
-      render json: @reservation, status: :created, location: @reservation
-    else
-      render json: @reservation.errors, status: :unprocessable_entity
+      if @reservation.save && @reservation.parking.update(is_available: false)
+        render json: @reservation, status: :created, location: @reservation
+      else
+        render json: @reservation.errors, status: :unprocessable_entity
+      end
+    rescue Stripe::CardError => e
+      render json: e.message, status: :bad_request
     end
   end
 
@@ -34,6 +46,7 @@ class ReservationsController < ApplicationController
   end
 
   private
+
   def set_reservation
     @reservation = Reservation.find(params[:id])
   end
@@ -47,7 +60,7 @@ class ReservationsController < ApplicationController
       :customer_id,
       :vehicule_id,
       :total_cost,
-      :charge
+      charge: [:amount, :customer, :currency, :parking_id]
     )
   end
 end
