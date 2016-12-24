@@ -6,6 +6,6 @@ one:
   stop_time: '19:54'
   parking: one
   customer: one
-  total_cost: 6.5
+  total_cost: 65
   vehicule_id: 1
   charge: 'ch_19PHtXJqqElIQmUWR5A3rihg'
