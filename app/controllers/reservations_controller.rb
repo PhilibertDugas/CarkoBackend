@@ -18,6 +18,7 @@ class ReservationsController < ApplicationController
       @reservation = Reservation.new(reservation_params.merge(charge: stripe_charge.id))
 
       if @reservation.save && @reservation.parking.update(is_available: false)
+        FreeParkingJob.set(wait_until: @reservation.wait_time).perform_later(@reservation.parking.id)
         render json: @reservation, status: :created, location: @reservation
       else
         render json: @reservation.errors, status: :unprocessable_entity
