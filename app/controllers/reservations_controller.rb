@@ -23,7 +23,7 @@ class ReservationsController < ApplicationController
       end
     rescue StandardError => e
       logger.error "Reservation is not valid: #{e.message}"
-      render json: e.message, status: :bad_request
+      render json: { error: e.message }, status: :bad_request
     end
   end
 
