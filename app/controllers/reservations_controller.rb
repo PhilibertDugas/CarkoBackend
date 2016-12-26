@@ -22,7 +22,7 @@ class ReservationsController < ApplicationController
         render json: @reservation.errors, status: :unprocessable_entity
       end
     rescue Stripe::CardError => e
-      Rails.logger.error(e.message)
+      logger.error(e.message)
       render json: e.message, status: :bad_request
     rescue StandardError => e
       render json: e.message, status: :bad_request
