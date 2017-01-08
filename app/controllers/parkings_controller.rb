@@ -49,6 +49,7 @@ class ParkingsController < ApplicationController
       :address,
       :customer_id,
       :is_available,
+      :is_complete,
       availability_info: [:stop_time, :start_time, :always_available, days_available: []]
     )
   end
