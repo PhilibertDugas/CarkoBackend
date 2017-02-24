@@ -12,7 +12,7 @@ class VehiculesController < ApplicationController
   end
 
   def create
-    customer_id = params[:id]
+    customer_id = params[:customer_id]
     @vehicule = Vehicule.new(vehicule_params.merge(customer_id: customer_id))
 
     if @vehicule.save
