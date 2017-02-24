@@ -12,7 +12,8 @@ class VehiculesController < ApplicationController
   end
 
   def create
-    @vehicule = Vehicule.new(vehicule_params)
+    customer_id = params[:id]
+    @vehicule = Vehicule.new(vehicule_params.merge(customer_id: customer_id))
 
     if @vehicule.save
       render json: @vehicule, status: :created, location: @vehicule
