@@ -6,24 +6,12 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    begin
-      @reservation = Reservation.new(reservation_params)
-      raise StandardError.new @reservation.errors.full_messages.to_sentence unless @reservation.valid?
-
-      parking = Parking.find_by(id: reservation_params[:parking_id])
-      charge = Charge.new(reservation_params[:charge].to_h, parking: parking)
-      stripe_charge = charge.save
-      @reservation.charge = stripe_charge.id
-
-      if @reservation.save_with_parking
-        @reservation.free_parking_later
-        render json: @reservation, status: :created, location: @reservation
-      else
-        render json: @reservation.errors, status: :unprocessable_entity
-      end
-    rescue StandardError => e
-      logger.error "Reservation is not valid: #{e.message}"
-      render json: { error: e.message }, status: :bad_request
+    @reservation = Reservation.new(reservation_params)
+    @reservation.create_charge(reservation_params[:charge].to_h, parking_id: reservation_params[:parking_id])
+    if @reservation.save
+      render json: @reservation, status: :created, location: @reservation
+    else
+      render json: @reservation.errors, status: :unprocessable_entity
     end
   end
 

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :customers, except: [:index] do
     resources :sources, only: [:create]
     resources :accounts, only: [:create]
-    resources :vehicules
+    resources :vehicules, except: [:index]
     post :default_source, controller: :sources
     post :external, controller: :accounts
   end

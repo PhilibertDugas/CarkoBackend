@@ -2,24 +2,16 @@ class SourcesController < ApplicationController
   before_action :set_customer
 
   def create
-    begin
-      stripe_customer = Stripe::Customer.retrieve(@customer.stripe_id)
-      stripe_customer.sources.create(source: customer_params[:source])
-      render status: :created
-    rescue Stripe::StripeError => e
-      render json: e.message, status: :bad_request
-    end
+    stripe_customer = Stripe::Customer.retrieve(@customer.stripe_id)
+    stripe_customer.sources.create(source: customer_params[:source])
+    render status: :created
   end
 
   def default_source
-    begin
-      stripe_customer = Stripe::Customer.retrieve(@customer.stripe_id)
-      stripe_customer.default_source = customer_params[:default_source]
-      stripe_customer.save
-      render status: :ok
-    rescue Stripe::StripeError => e
-      render json: e.message, status: :bad_request
-    end
+    stripe_customer = Stripe::Customer.retrieve(@customer.stripe_id)
+    stripe_customer.default_source = customer_params[:default_source]
+    stripe_customer.save
+    render status: :ok
   end
 
   private

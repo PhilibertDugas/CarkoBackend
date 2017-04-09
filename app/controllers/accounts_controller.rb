@@ -2,24 +2,16 @@ class AccountsController < ApplicationController
   before_action :load_customer
 
   def create
-    begin
-      account = Stripe::Account.create(account_params.to_h.reverse_merge(@customer.default_account_settings))
-      @customer.update!(account_id: account.id)
-      render :created
-    rescue Stripe::StripeError => e
-      render json: e.message, status: :bad_request
-    end
+    account = Stripe::Account.create(account_params.to_h.reverse_merge(@customer.default_account_settings))
+    @customer.update!(account_id: account.id)
+    render :created
   end
 
   def external
-    begin
-      account = Stripe::Account.retrieve(@customer.account_id)
-      external = account.external_accounts.create(external_account: external_params[:token])
-      @customer.update!(bank_last_4_digits: external.last4, bank_name: external.bank_name)
-      render :created
-    rescue Stripe::StripeError => e
-      render json: e.message, status: :bad_request
-    end
+    account = Stripe::Account.retrieve(@customer.account_id)
+    external = account.external_accounts.create(external_account: external_params[:token])
+    @customer.update!(bank_last_4_digits: external.last4, bank_name: external.bank_name)
+    render :created
   end
 
   private

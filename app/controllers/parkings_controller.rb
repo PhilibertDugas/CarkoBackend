@@ -3,7 +3,6 @@ class ParkingsController < ApplicationController
 
   def index
     @parkings = Parking.all
-
     render json: @parkings
   end
 
@@ -13,7 +12,6 @@ class ParkingsController < ApplicationController
 
   def create
     @parking = Parking.new(parking_params)
-
     if @parking.save
       render json: @parking, status: :created, location: @parking
     else

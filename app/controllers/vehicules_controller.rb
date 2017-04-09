@@ -1,12 +1,6 @@
 class VehiculesController < ApplicationController
   before_action :set_vehicule, only: [:show, :update, :destroy]
 
-  def index
-    @vehicules = Vehicule.all
-
-    render json: @vehicules
-  end
-
   def show
     render json: @vehicule
   end
@@ -14,7 +8,6 @@ class VehiculesController < ApplicationController
   def create
     customer_id = params[:customer_id]
     @vehicule = Vehicule.new(vehicule_params.merge(customer_id: customer_id))
-
     if @vehicule.save
       render json: @vehicule, status: :created
     else
