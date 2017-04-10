@@ -5,8 +5,7 @@ require 'mocha/mini_test'
 require 'stripe_mock'
 
 class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :all
+  include ActiveJob::TestHelper
 
-  # Add more helper methods to be used by all tests here...
+  fixtures :all
 end

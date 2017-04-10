@@ -16,14 +16,14 @@ class Charge
     parking.customer.account_id
   end
 
-
   def save
-    Stripe::Charge.create(
+    stripe_charge = Stripe::Charge.create(
       amount: amount,
       customer: customer,
       currency: currency,
       destination: destination,
       application_fee: application_fee
     )
+    stripe_charge.id
   end
 end
