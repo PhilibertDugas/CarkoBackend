@@ -8,7 +8,7 @@ class ReservationsController < ApplicationController
   def create
     @reservation = Reservation.new(reservation_params)
     @reservation.create_charge(reservation_params[:charge].to_h, parking_id: reservation_params[:parking_id])
-    if @reservation.save
+    if @reservation.reserve_with_parking
       render json: @reservation, status: :created, location: @reservation
     else
       render json: @reservation.errors, status: :unprocessable_entity

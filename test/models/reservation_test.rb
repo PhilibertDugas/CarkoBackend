@@ -23,7 +23,7 @@ class ReservationTest < ActiveSupport::TestCase
     assert_equal 'ch_19test', @reservation.charge
   end
 
-  test 'new reservations queue a free parking job' do
+  test '#reserve_with_parking queues a free parking job' do
     reservation = Reservation.new(
       is_active: true,
       start_time: '00:00',
@@ -35,7 +35,7 @@ class ReservationTest < ActiveSupport::TestCase
     )
 
     assert_enqueued_jobs 1, only: FreeParkingJob do
-      reservation.save
+      reservation.reserve_with_parking
     end
   end
 end

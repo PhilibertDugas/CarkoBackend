@@ -3,14 +3,20 @@ class Reservation < ApplicationRecord
   belongs_to :parking
   has_one :vehicule
 
-  after_create :reserve_parking
-
   def create_charge(charge_params, parking_id:)
     raise StandardError.new errors unless valid?
 
     parking = Parking.find_by(id: parking_id)
     charge = Charge.new(charge_params, parking: parking)
     self.charge = charge.save
+  end
+
+  def reserve_with_parking
+    ActiveRecord::Base.transaction do
+      parking.update(is_available: false)
+      save
+    end
+    reserve_parking
   end
 
   private
@@ -22,7 +28,6 @@ class Reservation < ApplicationRecord
   end
 
   def reserve_parking
-    parking.update(is_available: false)
     FreeParkingJob.set(wait_until: wait_time).perform_later(parking.id)
   end
 end
