@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :events
   resources :parkings
   resources :customers, except: [:index] do
     resources :sources, only: [:create]

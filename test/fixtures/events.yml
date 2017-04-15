@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  label: MyString
+  latitude: 1.5
+  longitude: 1.5
+  range: 1
+  price: 1.5
+  start_time: 2017-04-14 21:44:54
+  end_time: 2017-04-14 21:44:54
+
+two:
+  label: MyString
+  latitude: 1.5
+  longitude: 1.5
+  range: 1
+  price: 1.5
+  start_time: 2017-04-14 21:44:54
+  end_time: 2017-04-14 21:44:54

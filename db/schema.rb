@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170108184456) do
+ActiveRecord::Schema.define(version: 20170415014454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,18 @@ ActiveRecord::Schema.define(version: 20170108184456) do
     t.string   "bank_name"
     t.index ["email"], name: "index_customers_on_email", unique: true, using: :btree
     t.index ["vehicule_id"], name: "index_customer_vehicule_id", using: :btree
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "label"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "range"
+    t.float    "price"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "parkings", force: :cascade do |t|
