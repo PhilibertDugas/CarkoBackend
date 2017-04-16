@@ -29,14 +29,14 @@ Knock.setup do |config|
   ## Configure the key used to sign tokens.
   ##
   ## Default:
-  config.token_secret_signature_key = -> { Rails.application.secrets.token_secret_key }
+  # config.token_secret_signature_key = -> { OpenSSL::PKey::RSA.new Rails.application.secrets.token_private_key }
 
   ## Public key
   ## ----------
   ##
   ## Configure the public key used to decode tokens, if required.
   ##
-  config.token_public_key = -> { Rails.application.secrets.token_public_key }
+  config.token_public_key = OpenSSL::X509::Certificate.new(Rails.application.secrets.token_public_key).public_key
 
   ## Exception Class
   ## ---------------
