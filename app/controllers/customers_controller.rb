@@ -3,14 +3,8 @@ class CustomersController < ApplicationController
 
   def show
     if params[:type] == 'stripe'
-      begin
-        stripe_customer = Stripe::Customer.retrieve(@customer.stripe_id)
-        render json: stripe_customer.to_json, status: :ok
-      rescue Stripe::StripeError => e
-        render json: e.message, status: :not_found
-      end
-    elsif params[:type] == 'parkings'
-      render json: @customer.parkings
+      stripe_customer = Stripe::Customer.retrieve(@customer.stripe_id)
+      render json: stripe_customer.to_json, status: :ok
     else
       render json: @customer.to_json
     end
@@ -42,7 +36,7 @@ class CustomersController < ApplicationController
   private
 
   def set_customer
-    @customer = Customer.find_by(firebase_id: params[:id])
+    @customer = Customer.find_by(id: params[:id])
   end
 
   def customer_params

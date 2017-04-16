@@ -39,14 +39,14 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "#show return not found when stripe has an error" do
+  test "#show return bad request when stripe has an error" do
     StripeMock.prepare_error(Stripe::StripeError.new("Customer not found"), :get_customer)
-    get customer_url(@customer.firebase_id, type: 'stripe')
-    assert_response :not_found
+    get customer_url(@customer.id, type: 'stripe')
+    assert_response :bad_request
   end
 
   test "should update customer" do
-    patch customer_url(@customer.firebase_id), params: {
+    patch customer_url(@customer.id), params: {
       customer: {
         email: @customer.email,
         firebase_id: @customer.firebase_id,
@@ -59,7 +59,7 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
 
   test "should destroy customer" do
     assert_difference('Customer.count', -1) do
-      delete customer_url(@customer.firebase_id), as: :json
+      delete customer_url(@customer.id), as: :json
     end
 
     assert_response 204
