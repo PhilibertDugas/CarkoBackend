@@ -1,0 +1,3 @@
+#!/bin/sh
+git push $DEPLOY_ENV master
+heroku run:detached -a $DEPLOY_ENV-apya rake db:migrate
