@@ -1,5 +1,6 @@
 class ParkingsController < ApplicationController
   before_action :set_parking, only: [:show, :update, :destroy]
+  before_action :authenticate_customer
 
   def index
     @parkings = Parking.all

@@ -1,13 +1,14 @@
 class CustomersController < ApplicationController
   before_action :set_customer, except: [:create, :show]
+  before_action :authenticate_customer, :authorize_customer, except: [:show, :create]
 
   def show
-    @customer = Customer.find_by(firebase_id: params[:id])
+    current_customer = Customer.find_by(firebase_id: params[:id])
     if params[:type] == 'stripe'
-      stripe_customer = Stripe::Customer.retrieve(@customer.stripe_id)
+      stripe_customer = Stripe::Customer.retrieve(current_customer.stripe_id)
       render json: stripe_customer.to_json, status: :ok
     else
-      render json: @customer.to_json
+      render json: current_customer.to_json
     end
   end
 

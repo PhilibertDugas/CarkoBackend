@@ -10,4 +10,11 @@ class Customer < ApplicationRecord
   def default_account_settings
     { managed: true }
   end
+
+  def authenticate
+  end
+
+  def self.from_token_payload(payload)
+    self.find_by(firebase_id: payload["sub"])
+  end
 end

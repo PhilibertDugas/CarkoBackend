@@ -13,6 +13,8 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 
 gem 'stripe', '~> 1.55'
+gem 'knock', '~> 2.1.1'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
