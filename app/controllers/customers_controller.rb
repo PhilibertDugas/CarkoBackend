@@ -1,7 +1,8 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, except: [:create]
+  before_action :set_customer, except: [:create, :show]
 
   def show
+    @customer = Customer.find_by(firebase_id: params[:id])
     if params[:type] == 'stripe'
       stripe_customer = Stripe::Customer.retrieve(@customer.stripe_id)
       render json: stripe_customer.to_json, status: :ok
