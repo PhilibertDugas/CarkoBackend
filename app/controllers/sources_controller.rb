@@ -1,5 +1,6 @@
 class SourcesController < ApplicationController
-  before_action :set_customer
+  before_action :authenticate_customer
+  before_action -> { authorize_customer(params[:customer_id]) }
 
   def create
     stripe_customer = Stripe::Customer.retrieve(@customer.stripe_id)
@@ -15,10 +16,6 @@ class SourcesController < ApplicationController
   end
 
   private
-
-  def set_customer
-    @customer = Customer.find_by(firebase_id: params[:customer_id])
-  end
 
   def customer_params
     params.require(:customer).permit(:firebase_id, :source, :default_source)

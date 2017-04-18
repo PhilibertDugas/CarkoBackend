@@ -1,5 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :update, :destroy]
+  before_action :authenticate_customer
 
   def show
     render json: @reservation

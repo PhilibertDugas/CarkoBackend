@@ -8,4 +8,9 @@ class ActiveSupport::TestCase
   include ActiveJob::TestHelper
 
   fixtures :all
+
+  def auth_headers
+    @token ||= File.read(Rails.root.join("test", "fixtures", "token.txt"))
+    { "Authorization" => "Bearer #{@token}" }
+  end
 end

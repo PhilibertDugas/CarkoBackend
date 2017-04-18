@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class CustomersControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -13,12 +13,12 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create customer" do
     customer = Customer.new(
-      email: 'philibert.testing@gmail.com',
-      first_name: 'Philibert',
-      last_name: 'Testing',
-      firebase_id: '2'
+      email: "philibert.testing@gmail.com",
+      first_name: "Philibert",
+      last_name: "Testing",
+      firebase_id: "2"
     )
-    assert_difference('Customer.count') do
+    assert_difference("Customer.count") do
       post customers_url, params: {
         customer: {
           email: customer.email,
@@ -41,7 +41,7 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
 
   test "#show return bad request when stripe has an error" do
     StripeMock.prepare_error(Stripe::StripeError.new("Customer not found"), :get_customer)
-    get customer_url(@customer.id, type: 'stripe')
+    get customer_url(@customer.id, type: "stripe")
     assert_response :bad_request
   end
 
@@ -53,13 +53,13 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
         first_name: @customer.first_name,
         last_name: @customer.last_name
       }
-    }, as: :json
+    }, headers: auth_headers, as: :json
     assert_response 200
   end
 
   test "should destroy customer" do
-    assert_difference('Customer.count', -1) do
-      delete customer_url(@customer.id), as: :json
+    assert_difference("Customer.count", -1) do
+      delete customer_url(@customer.id), headers: auth_headers, as: :json
     end
 
     assert_response 204

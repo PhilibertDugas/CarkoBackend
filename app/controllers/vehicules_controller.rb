@@ -1,13 +1,15 @@
 class VehiculesController < ApplicationController
   before_action :set_vehicule, only: [:show, :update, :destroy]
+  before_action :authenticate_customer
+  before_action -> { authorize_customer(params[:customer_id]) }
 
   def show
     render json: @vehicule
   end
 
   def create
-    customer_id = params[:customer_id]
-    @vehicule = Vehicule.new(vehicule_params.merge(customer_id: customer_id))
+    @vehicule = Vehicule.new(vehicule_params)
+    @vehicule.customer = @customer
     if @vehicule.save
       render json: @vehicule, status: :created
     else
@@ -34,6 +36,6 @@ class VehiculesController < ApplicationController
   end
 
   def vehicule_params
-    params.require(:vehicule).permit(:license_plate, :make, :model, :year, :color, :province, :customer_id)
+    params.require(:vehicule).permit(:license_plate, :make, :model, :year, :color, :province)
   end
 end

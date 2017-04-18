@@ -1,6 +1,7 @@
 class CustomersController < ApplicationController
   before_action :set_customer, except: [:create, :show]
-  before_action :authenticate_customer, :authorize_customer, except: [:show, :create]
+  before_action :authenticate_customer, except: [:show, :create]
+  before_action -> { authorize_customer(params[:id]) }, except: [:show, :create]
 
   def show
     current_customer = Customer.find_by(firebase_id: params[:id])

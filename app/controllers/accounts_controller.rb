@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
-  before_action :load_customer
+  before_action :authenticate_customer
+  before_action -> { authorize_customer(params[:customer_id]) }
 
   def create
     account = Stripe::Account.create(account_params.to_h.reverse_merge(@customer.default_account_settings))
@@ -15,10 +16,6 @@ class AccountsController < ApplicationController
   end
 
   private
-
-  def load_customer
-    @customer = Customer.find_by(params[:id])
-  end
 
   def external_params
     params.require(:external).permit(:token)

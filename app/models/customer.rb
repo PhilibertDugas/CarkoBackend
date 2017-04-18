@@ -11,10 +11,7 @@ class Customer < ApplicationRecord
     { managed: true }
   end
 
-  def authenticate
-  end
-
-  def self.from_token_payload(payload)
-    self.find_by(firebase_id: payload["sub"])
+  def self.from_jwt_token(token)
+    self.find_by(firebase_id: token["sub"])
   end
 end

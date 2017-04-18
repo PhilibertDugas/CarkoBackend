@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :events
   resources :parkings
   resources :customers, except: [:index] do
-    resources :parkings, only: [:index], controller: :customer_parkings
+    resources :parkings, controller: :customer_parkings
     resources :sources, only: [:create]
     resources :accounts, only: [:create]
     resources :vehicules, except: [:index]

@@ -24,25 +24,25 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
       charge: { amount: 65, currency: 'CAD', customer: customer }
     }
     assert_difference('Reservation.count') do
-      post reservations_url, params: payload, as: :json
+      post reservations_url, params: payload, headers: auth_headers, as: :json
       assert_response 201
     end
 
   end
 
   test "should show reservation" do
-    get reservation_url(@reservation), as: :json
+    get reservation_url(@reservation), headers: auth_headers, as: :json
     assert_response :success
   end
 
   test "should update reservation" do
-    patch reservation_url(@reservation), params: { reservation: { is_active: false } }, as: :json
+    patch reservation_url(@reservation), headers: auth_headers, params: { reservation: { is_active: false } }, as: :json
     assert_response 200
   end
 
   test "should destroy reservation" do
     assert_difference('Reservation.count', -1) do
-      delete reservation_url(@reservation), as: :json
+      delete reservation_url(@reservation), headers: auth_headers, as: :json
     end
 
     assert_response 204

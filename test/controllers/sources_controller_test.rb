@@ -14,9 +14,9 @@ class SourcesControllerTest < ActionDispatch::IntegrationTest
   test "#sources adds a source to the customer" do
     id = Stripe::Customer.create(email: @customer.email).id
     @customer.update!(stripe_id: id)
-    post customer_sources_url(@customer.firebase_id), params: {
+    post customer_sources_url(@customer), params: {
       customer: { source: @stripe_helper.generate_card_token }
-    }
+    }, headers: auth_headers
     assert_response :created
   end
 
@@ -24,18 +24,18 @@ class SourcesControllerTest < ActionDispatch::IntegrationTest
     id = Stripe::Customer.create(email: @customer.email).id
     @customer.update!(stripe_id: id)
     StripeMock.prepare_error(Stripe::StripeError.new("Invalid source"), :create_source)
-    post customer_sources_url(@customer.firebase_id), params: {
+    post customer_sources_url(@customer), params: {
       customer: { source: @stripe_helper.generate_card_token }
-    }
+    }, headers: auth_headers
     assert_response :bad_request
   end
 
   test "#default_source adds the default source to the customer" do
     id = Stripe::Customer.create(email: @customer.email).id
     @customer.update!(stripe_id: id)
-    post customer_default_source_url(@customer.firebase_id), params: {
+    post customer_default_source_url(@customer), params: {
       customer: { default_source: @stripe_helper.generate_card_token }
-    }
+    }, headers: auth_headers
     assert_response :ok
   end
 
@@ -43,9 +43,9 @@ class SourcesControllerTest < ActionDispatch::IntegrationTest
     id = Stripe::Customer.create(email: @customer.email).id
     @customer.update!(stripe_id: id)
     StripeMock.prepare_error(Stripe::StripeError.new("Invalid default source"), :update_customer)
-    post customer_default_source_url(@customer.firebase_id), params: {
+    post customer_default_source_url(@customer), params: {
       customer: { source: @stripe_helper.generate_card_token }
-    }
+    }, headers: auth_headers
     assert_response :bad_request
   end
 end
