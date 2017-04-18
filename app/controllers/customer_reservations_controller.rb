@@ -1,6 +1,7 @@
-class ReservationsController < ApplicationController
+class CustomerReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :update, :destroy]
   before_action :authenticate_customer
+  before_action -> { authorize_customer(params[:customer_id]) }, except: [:index, :show]
 
   def show
     render json: @reservation
@@ -8,9 +9,10 @@ class ReservationsController < ApplicationController
 
   def create
     @reservation = Reservation.new(reservation_params)
+    @reservation.customer = @customer
     @reservation.create_charge(reservation_params[:charge].to_h, parking_id: reservation_params[:parking_id])
     if @reservation.reserve_with_parking
-      render json: @reservation, status: :created, location: @reservation
+      render json: @reservation, status: :created
     else
       render json: @reservation.errors, status: :unprocessable_entity
     end

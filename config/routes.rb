@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :events
   resources :parkings
   resources :customers, except: [:index] do
+    resources :reservations, controller: :customer_reservations
     resources :parkings, controller: :customer_parkings
     resources :sources, only: [:create]
     resources :accounts, only: [:create]
@@ -9,6 +10,4 @@ Rails.application.routes.draw do
     post :default_source, controller: :sources
     post :external, controller: :accounts
   end
-
-  resources :reservations
 end
