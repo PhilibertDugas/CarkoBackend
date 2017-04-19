@@ -6,12 +6,12 @@ class ParkingsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get parkings_url, as: :json
+    get parkings_url, headers: auth_headers, as: :json
     assert_response :success
   end
 
   test "should show parking" do
-    get parking_url(@parking), as: :json
+    get parking_url(@parking), headers: auth_headers, as: :json
     assert_response :success
   end
 end

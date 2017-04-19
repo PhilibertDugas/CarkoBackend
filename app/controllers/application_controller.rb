@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::API
   include Authorizable
 
+  before_action :authenticate_customer
+
   rescue_from Stripe::StripeError, with: :stripe_error
   rescue_from StandardError, with: :general_error
 

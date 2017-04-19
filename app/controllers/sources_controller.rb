@@ -1,7 +1,4 @@
-class SourcesController < ApplicationController
-  before_action :authenticate_customer
-  before_action -> { authorize_customer(params[:customer_id]) }
-
+class SourcesController < CustomerAreaController
   def create
     stripe_customer = Stripe::Customer.retrieve(@customer.stripe_id)
     stripe_customer.sources.create(source: customer_params[:source])

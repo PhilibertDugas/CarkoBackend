@@ -1,7 +1,4 @@
-class AccountsController < ApplicationController
-  before_action :authenticate_customer
-  before_action -> { authorize_customer(params[:customer_id]) }
-
+class AccountsController < CustomerAreaController
   def create
     account = Stripe::Account.create(account_params.to_h.reverse_merge(@customer.default_account_settings))
     @customer.update!(account_id: account.id)

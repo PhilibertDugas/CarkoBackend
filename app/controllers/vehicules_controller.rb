@@ -1,7 +1,5 @@
-class VehiculesController < ApplicationController
+class VehiculesController < CustomerAreaController
   before_action :set_vehicule, only: [:show, :update, :destroy]
-  before_action :authenticate_customer
-  before_action -> { authorize_customer(params[:customer_id]) }
 
   def show
     render json: @vehicule

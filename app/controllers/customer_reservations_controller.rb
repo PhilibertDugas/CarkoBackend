@@ -1,7 +1,5 @@
-class CustomerReservationsController < ApplicationController
+class CustomerReservationsController < CustomerAreaController
   before_action :set_reservation, only: [:show, :update, :destroy]
-  before_action :authenticate_customer
-  before_action -> { authorize_customer(params[:customer_id]) }, except: [:index, :show]
 
   def show
     render json: @reservation

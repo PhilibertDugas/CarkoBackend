@@ -1,7 +1,5 @@
-class CustomerParkingsController < ApplicationController
+class CustomerParkingsController < CustomerAreaController
   before_action :set_parking, only: [:show, :update, :destroy]
-  before_action :authenticate_customer
-  before_action -> { authorize_customer(params[:customer_id]) }, except: [:index, :show]
 
   def index
     @customer = Customer.find_by(id: params[:customer_id])

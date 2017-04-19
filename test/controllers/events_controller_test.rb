@@ -6,7 +6,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get events_url, as: :json
+    get events_url, headers: auth_headers, as: :json
     assert_response :success
   end
 
@@ -22,14 +22,14 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
           range: @event.range,
           start_time: @event.start_time
         }
-      }, as: :json
+      }, headers: auth_headers, as: :json
     end
 
     assert_response 201
   end
 
   test "should show event" do
-    get event_url(@event), as: :json
+    get event_url(@event), headers: auth_headers, as: :json
     assert_response :success
   end
 
@@ -44,13 +44,13 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
         range: @event.range,
         start_time: @event.start_time
       }
-    }, as: :json
+    }, headers: auth_headers, as: :json
     assert_response 200
   end
 
   test "should destroy event" do
     assert_difference('Event.count', -1) do
-      delete event_url(@event), as: :json
+      delete event_url(@event), headers: auth_headers, as: :json
     end
 
     assert_response 204
