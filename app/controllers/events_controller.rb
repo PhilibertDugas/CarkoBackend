@@ -38,6 +38,16 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:label, :latitude, :longitude, :range, :price, :start_time, :end_time)
+    params.require(:event).permit(
+      :label,
+      :latitude,
+      :longitude,
+      :range,
+      :price,
+      :start_time,
+      :end_time,
+      :photo_url,
+      :target_audience
+    )
   end
 end
