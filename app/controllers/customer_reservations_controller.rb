@@ -1,6 +1,11 @@
 class CustomerReservationsController < CustomerAreaController
   before_action :set_reservation, only: [:show, :update, :destroy]
 
+  def index
+    @reservations = Reservation.where(customer_id: @customer.id)
+    render json: @reservations
+  end
+
   def show
     render json: @reservation
   end

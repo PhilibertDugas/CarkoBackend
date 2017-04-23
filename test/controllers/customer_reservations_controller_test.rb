@@ -32,6 +32,12 @@ class CustomerReservationsControllerTest < ActionDispatch::IntegrationTest
 
   end
 
+  test "#index should show all reservations for a given customer" do
+    get customer_reservations_url(@customer), headers: auth_headers, as: :json
+    assert_response :ok
+    assert_equal 1, JSON.parse(body).count
+  end
+
   test "should show reservation" do
     get customer_reservation_url(@customer, @reservation), headers: auth_headers, as: :json
     assert_response :success
