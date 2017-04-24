@@ -26,8 +26,8 @@ class ReservationTest < ActiveSupport::TestCase
   test '#reserve_with_parking queues a free parking job' do
     reservation = Reservation.new(
       is_active: true,
-      start_time: '00:00',
-      stop_time: '17:00',
+      start_time: '2017-06-06 00:00',
+      stop_time: '2017-06-06 17:00',
       parking_id: parkings(:one).id,
       customer_id: customers(:one).id,
       total_cost: 65,

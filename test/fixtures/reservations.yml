@@ -2,8 +2,8 @@
 
 one:
   is_active: true
-  start_time: '15:56'
-  stop_time: '19:54'
+  start_time: '2017-06-06 15:56'
+  stop_time: '2017-06-06 19:54'
   parking: one
   customer: one
   total_cost: 65

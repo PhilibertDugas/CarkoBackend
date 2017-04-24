@@ -16,18 +16,6 @@ class Reservation < ApplicationRecord
       parking.update(is_available: false)
       save
     end
-    reserve_parking
-  end
-
-  private
-
-  def wait_time
-    stop_hour = stop_time.split(':').first
-    stop_minute = stop_time.split(':').last
-    Time.now.change(hour: stop_hour, min: stop_minute)
-  end
-
-  def reserve_parking
-    FreeParkingJob.set(wait_until: wait_time).perform_later(parking.id)
+    FreeParkingJob.set(wait_until: stop_time).perform_later(parking.id)
   end
 end
