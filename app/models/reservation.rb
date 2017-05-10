@@ -7,7 +7,12 @@ class Reservation < ApplicationRecord
     raise StandardError.new errors unless valid?
 
     parking = Parking.find_by(id: parking_id)
-    charge = Charge.new(charge_params, parking: parking)
+    charge = Charge.new(
+      charge_params[:amount],
+      customer: charge_params[:customer],
+      currency: charge_params[:currency],
+      parking: parking
+    )
     self.charge = charge.save
   end
 

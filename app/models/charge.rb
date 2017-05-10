@@ -1,10 +1,10 @@
 class Charge
   attr_reader :amount, :customer, :currency, :parking
 
-  def initialize(charge_params, parking:)
-    @amount = charge_params[:amount]
-    @customer = charge_params[:customer]
-    @currency = charge_params[:currency]
+  def initialize(amount, customer:, currency:, parking:)
+    @amount = amount
+    @customer = customer
+    @currency = currency
     @parking = parking
   end
 
