@@ -7,4 +7,4 @@ one:
   year: 2003
   color: Blue
   province: Quebec
-  customer: one
+  customer: authenticated_customer

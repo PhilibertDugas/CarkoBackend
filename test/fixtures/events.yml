@@ -1,19 +1,34 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  label: MyString
-  latitude: 1.5
-  longitude: 1.5
-  range: 1
-  price: 1.5
-  start_time: 2017-04-14 21:44:54
-  end_time: 2017-04-14 21:44:54
+canadien:
+  label: Canadien
+  latitude: 45.4960667
+  longitude: -73.571504
+  range: 900
+  price: 20.00
+  start_time: 2017-06-05 00:00:00
+  end_time: 2017-06-05 00:00:00
+  photo_url: gs://carko-1475431423846.appspot.com/price.jpg
+  target_audience: 10000
 
-two:
-  label: MyString
-  latitude: 1.5
-  longitude: 1.5
-  range: 1
-  price: 1.5
-  start_time: 2017-04-14 21:44:54
-  end_time: 2017-04-14 21:44:54
+impact:
+  label: Impact 26 Juin
+  latitude: 45.558
+  longitude: -73.5519
+  range: 1000
+  price: 10.00
+  start_time: 2017-06-26 00:00:00
+  end_time: 2017-06-27 00:00:00
+  photo_url: gs://carko-1475431423846.appspot.com/impact.JPG
+  target_audience: 100000
+
+alouette:
+  label: Alouette 3 Juillet
+  latitude: 45.510151
+  longitude: -73.580699
+  range: 1250
+  price: 10.00
+  start_time: 2017-07-03 00:00:00
+  end_time: 2017-07-04 00:00:00
+  photo_url: gs://carko-1475431423846.appspot.com/alouette-red.jpg
+  target_audience: 100000

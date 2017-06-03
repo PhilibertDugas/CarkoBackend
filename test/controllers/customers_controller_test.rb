@@ -2,7 +2,7 @@ require "test_helper"
 
 class CustomersControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @customer = customers(:one)
+    @customer = customers(:authenticated_customer)
     @stripe_helper = StripeMock.create_test_helper
     StripeMock.start
   end

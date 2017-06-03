@@ -4,7 +4,7 @@ class Reservation < ApplicationRecord
   has_one :vehicule
 
   def create_charge(charge_params, parking_id:)
-    raise StandardError.new errors unless valid?
+    raise StandardError.new errors.messages unless valid?
 
     parking = Parking.find_by(id: parking_id)
     charge = Charge.new(

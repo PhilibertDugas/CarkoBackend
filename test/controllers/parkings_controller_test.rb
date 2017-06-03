@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ParkingsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @parking = parkings(:one)
+    @parking = parkings(:villeray)
   end
 
   test "should get index" do

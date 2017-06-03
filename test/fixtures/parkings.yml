@@ -1,15 +1,36 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one: &one
+villeray: &villeray
   latitude: 1.5
   longitude: 1.5
-  photo_url: "https://google.com"
+  photo_url: "https://firebasestorage.googleapis.com/v0/b/carko-1475431423846.appspot.com/o/user_7_2017-01-18%2014:22:29%20%200000?alt=media&token=9063f9c3-05e2-4774-8691-9fc09f6b4d70"
   price: 500
   address: "1160 Rue Villeray"
-  customer: one
+  customer: authenticated_customer
   is_available: true
   availability_info: {"stop_time":"23:59","start_time":"00:00","always_available":false,"days_available":[1,1,1,1,1,1,1]}
+  is_complete: true
 
 busy_parking:
-  <<: *one
+  <<: *villeray
   is_available: false
+
+alouette_parking: &alouette
+  latitude: 45.510151
+  longitude: -73.581
+  photo_url: "https://firebasestorage.googleapis.com/v0/b/carko-1475431423846.appspot.com/o/user_9_2017-05-20%2002:22:07%20%200000?alt=media&token=cc3fe4d8-37ff-49a1-a260-94d38772f379"
+  price: 500
+  address: "Dummy"
+  customer: authenticated_customer
+  is_available: true
+  availability_info: {"stop_time":"23:59","start_time":"00:00","always_available":false,"days_available":[1,1,1,1,1,1,1]}
+  is_complete: true
+
+alouette_parking_2:
+  <<: *alouette
+  longitude: -73.579
+
+alouette_parking_3:
+  <<: *alouette
+  longitude: -73.580699
+  latitude: 45.512

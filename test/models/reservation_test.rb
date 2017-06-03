@@ -9,7 +9,7 @@ class ReservationTest < ActiveSupport::TestCase
     @reservation.customer = nil
     charge_params = { amount: 10.0, currency: 'CAD' }
     assert_raise StandardError do
-      @reservation.create_charge(charge_params, parking_id: 1)
+      @reservation.create_charge(charge_params, parking_id: parkings(:villeray).id)
     end
   end
 
@@ -28,8 +28,8 @@ class ReservationTest < ActiveSupport::TestCase
       is_active: true,
       start_time: '2017-06-06 00:00',
       stop_time: '2017-06-06 17:00',
-      parking_id: parkings(:one).id,
-      customer_id: customers(:one).id,
+      parking_id: parkings(:villeray).id,
+      customer_id: customers(:authenticated_customer).id,
       total_cost: 65,
       vehicule_id: vehicules(:one).id
     )

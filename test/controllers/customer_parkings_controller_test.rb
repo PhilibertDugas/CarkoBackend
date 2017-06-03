@@ -2,8 +2,8 @@ require 'test_helper'
 
 class CustomerParkingsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @parking = parkings(:one)
-    @customer = customers(:one)
+    @parking = parkings(:villeray)
+    @customer = customers(:authenticated_customer)
   end
 
   test "should create parking" do
