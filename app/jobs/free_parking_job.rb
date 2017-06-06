@@ -1,8 +1,9 @@
 class FreeParkingJob < ApplicationJob
   queue_as :default
 
-  def perform(parking_id)
-    parking = Parking.find_by(id: parking_id)
+  def perform(reservation)
+    parking = reservation.parking
     parking.update!(is_available: true)
+    reservation.update!(is_active: false)
   end
 end

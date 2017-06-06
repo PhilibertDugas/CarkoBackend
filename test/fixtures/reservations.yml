@@ -9,3 +9,13 @@ one:
   total_cost: 65
   vehicule_id: 1
   charge: 'ch_19PHtXJqqElIQmUWR5A3rihg'
+
+active_reservation:
+  is_active: true
+  start_time: '2017-06-06 15:56'
+  stop_time: '2017-06-06 19:54'
+  parking: busy_parking
+  customer: authenticated_customer
+  total_cost: 65
+  vehicule_id: 1
+  charge: 'ch_19PHtXJqqElIQmUWR5A3rihg'

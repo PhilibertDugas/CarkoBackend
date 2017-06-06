@@ -21,6 +21,6 @@ class Reservation < ApplicationRecord
       parking.update(is_available: false)
       save
     end
-    FreeParkingJob.set(wait_until: stop_time).perform_later(parking.id)
+    FreeParkingJob.set(wait_until: stop_time).perform_later(self)
   end
 end
