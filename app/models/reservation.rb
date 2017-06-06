@@ -3,6 +3,10 @@ class Reservation < ApplicationRecord
   belongs_to :parking
   has_one :vehicule
 
+  def as_json(options = {})
+    super(include: [:parking])
+  end
+
   def create_charge(charge_params, parking_id:)
     raise StandardError.new errors.messages unless valid?
 
