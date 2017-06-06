@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :parkings
   resources :customers, except: [:index] do
     resources :reservations, controller: :customer_reservations
-    get :active_reservations, controller: :customer_active_reservations, only: [:index]
+    resource 'active_reservations', action: 'index', controller: :customer_active_reservations
 
     resources :parkings, controller: :customer_parkings
     resources :sources, only: [:create]
