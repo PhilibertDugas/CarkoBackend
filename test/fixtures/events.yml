@@ -11,7 +11,7 @@ canadien:
   photo_url: gs://carko-1475431423846.appspot.com/price.jpg
   target_audience: 10000
 
-impact:
+impact: &impact
   label: Impact 26 Juin
   latitude: 45.558
   longitude: -73.5519
@@ -32,3 +32,11 @@ alouette:
   end_time: 2017-07-04 00:00:00
   photo_url: gs://carko-1475431423846.appspot.com/alouette-red.jpg
   target_audience: 100000
+
+impact_19_juillet:
+  <<: *impact
+  label: Impact 19 Juillet
+  start_time: 2017-07-19 18:00:00
+  start_time: 2017-07-20 02:00:00
+  photo_url: gs://carko-1475431423846.appspot.com/CwDltCRWcAAZuSr.jpg
+
