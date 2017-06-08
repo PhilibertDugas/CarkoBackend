@@ -26,6 +26,10 @@ alouette_parking: &alouette
   availability_info: {"stop_time":"23:59","start_time":"00:00","always_available":false,"days_available":[1,1,1,1,1,1,1]}
   is_complete: true
 
+alouette_unavailable_on_monday:
+  <<: *alouette
+  availability_info: {"stop_time":"23:59","start_time":"00:00","always_available":false,"days_available":[0,1,1,1,1,1,1]}
+
 alouette_parking_2:
   <<: *alouette
   longitude: -73.579
@@ -34,3 +38,7 @@ alouette_parking_3:
   <<: *alouette
   longitude: -73.580699
   latitude: 45.512
+
+alouette_parking_too_far:
+  <<: *alouette
+  longitude: -70.1789

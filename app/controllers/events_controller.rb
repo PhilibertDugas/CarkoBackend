@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  # events should be public
+  skip_before_action :authenticate_customer
   before_action :set_event, only: [:show, :update, :destroy]
 
   def index

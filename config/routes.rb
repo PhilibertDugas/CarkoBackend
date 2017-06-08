@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  resources :events
+  resources :events do
+    resources :parkings, controller: :event_parkings, only: [:index]
+  end
+
   resources :parkings
+
   resources :customers, except: [:index] do
     resources :reservations, controller: :customer_reservations
     resource 'active_reservations', action: 'index', controller: :customer_active_reservations
