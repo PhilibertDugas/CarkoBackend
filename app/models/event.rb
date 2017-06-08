@@ -4,7 +4,7 @@ class Event < ApplicationRecord
   end
 
   def available_parkings
-    parkings = Parking.near([latitude, longitude], range / 1000, units: :km)
+    parkings = Parking.near([latitude, longitude], range / 1000.0, units: :km)
 
     event_index = convert_day_to_array_index(start_time)
     parkings.select { |parking| parking.available?(event_index) }
