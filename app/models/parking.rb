@@ -6,6 +6,6 @@ class Parking < ApplicationRecord
   reverse_geocoded_by :latitude, :longitude
 
   def available?(day_index)
-    availability_info["days_available"][day_index] == 1
+    availability_info["days_available"][day_index] == 0
   end
 end

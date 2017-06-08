@@ -8,7 +8,7 @@ villeray: &villeray
   address: "1160 Rue Villeray"
   customer: authenticated_customer
   is_available: true
-  availability_info: {"stop_time":"23:59","start_time":"00:00","always_available":false,"days_available":[1,1,1,1,1,1,1]}
+  availability_info: {"stop_time":"23:59","start_time":"00:00","always_available":false,"days_available":[0,0,0,0,0,0,0]}
   is_complete: true
 
 busy_parking:
@@ -23,12 +23,12 @@ alouette_parking: &alouette
   address: "Dummy"
   customer: authenticated_customer
   is_available: true
-  availability_info: {"stop_time":"23:59","start_time":"00:00","always_available":false,"days_available":[1,1,1,1,1,1,1]}
+  availability_info: {"stop_time":"23:59","start_time":"00:00","always_available":false,"days_available":[0,0,0,0,0,0,0]}
   is_complete: true
 
 alouette_unavailable_on_monday:
   <<: *alouette
-  availability_info: {"stop_time":"23:59","start_time":"00:00","always_available":false,"days_available":[0,1,1,1,1,1,1]}
+  availability_info: {"stop_time":"23:59","start_time":"00:00","always_available":false,"days_available":[1,0,0,0,0,0,0]}
 
 alouette_parking_2:
   <<: *alouette
