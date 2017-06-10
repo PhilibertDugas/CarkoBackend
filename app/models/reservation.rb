@@ -26,6 +26,14 @@ class Reservation < ApplicationRecord
       save
     end
     FreeParkingJob.set(wait_until: stop_time).perform_later(self)
-    NotifyParkingRecipientNewReservationJob.perform_later(self)
+    if token = parking.customer.token
+      NotificationPushService.send(token, reservation_success_message)
+    end
+  end
+
+  private
+
+  def reservation_success_message
+    "Congratulations, you have a new reservation on #{start_time}"
   end
 end
