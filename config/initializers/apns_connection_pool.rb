@@ -1,4 +1,4 @@
-apns_cert = Rails.application.secrets[:apns_cert]
+Rails.env.production? ? ENV['APNS_CERT'] : Rails.application.secrets[:apns_cert]
 options = {
     url: Rails.application.secrets[:apns_url],
     cert_path: StringIO.new(apns_cert)
