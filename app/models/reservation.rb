@@ -26,5 +26,6 @@ class Reservation < ApplicationRecord
       save
     end
     FreeParkingJob.set(wait_until: stop_time).perform_later(self)
+    NotifyParkingRecipientNewReservationJob.perform_later(self)
   end
 end
