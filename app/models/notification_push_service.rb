@@ -10,6 +10,7 @@ class NotificationPushService
         notification = Apnotic::Notification.new(token)
         notification.alert = alert_message
         notification.custom_payload = { UUID: uuid }.merge(payload)
+        notification.topic = "com.qh4l.Apya"
 
         Rails.logger.info "[NotificationPushService] Sending push notification: #{notification.custom_payload}"
 
