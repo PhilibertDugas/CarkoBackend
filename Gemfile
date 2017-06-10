@@ -16,6 +16,7 @@ gem 'stripe', '~> 1.55'
 gem 'jwt', '~> 1.5.6'
 gem 'rollbar'
 gem 'geocoder'
+gem 'apnotic'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
