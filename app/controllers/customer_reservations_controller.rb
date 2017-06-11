@@ -48,7 +48,7 @@ class CustomerReservationsController < CustomerAreaController
       :customer_id,
       :vehicule_id,
       :total_cost,
-      :label,
+      :event_id,
       charge: [:amount, :customer, :currency, :parking_id]
     )
   end
