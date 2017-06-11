@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170611025959) do
+ActiveRecord::Schema.define(version: 20170611030401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20170611025959) do
     t.datetime "updated_at", null: false
     t.string "photo_url"
     t.integer "target_audience"
+    t.string "label"
   end
 
   create_table "parkings", id: :serial, force: :cascade do |t|
@@ -73,7 +74,6 @@ ActiveRecord::Schema.define(version: 20170611025959) do
     t.float "total_cost"
     t.integer "vehicule_id"
     t.string "charge"
-    t.string "label", default: ""
     t.integer "event_id"
     t.index ["customer_id"], name: "index_customer_id"
     t.index ["event_id"], name: "index_reservation_event_id"

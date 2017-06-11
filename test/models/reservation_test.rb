@@ -31,7 +31,8 @@ class ReservationTest < ActiveSupport::TestCase
       parking_id: parkings(:villeray).id,
       customer_id: customers(:authenticated_customer).id,
       total_cost: 65,
-      vehicule_id: vehicules(:one).id
+      vehicule_id: vehicules(:one).id,
+      event: events(:canadien)
     )
 
     assert_enqueued_jobs 1, only: FreeParkingJob do

@@ -4,6 +4,7 @@ class ParkingTest < ActiveSupport::TestCase
   setup do
     @monday = Date.new(2017, 06, 05)
   end
+
   test "#available? returns true for the index 0 when monday is available" do
     parking = parkings(:alouette_parking)
     assert_equal true, parking.available?(@monday)

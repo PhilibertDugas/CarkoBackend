@@ -22,7 +22,8 @@ class CustomerReservationsControllerTest < ActionDispatch::IntegrationTest
         parking_id: @reservation.parking_id,
         vehicule_id: @reservation.vehicule_id,
         total_cost: @reservation.total_cost,
-        charge: { amount: 65, currency: 'CAD', customer: stripe_customer }
+        charge: { amount: 65, currency: 'CAD', customer: stripe_customer },
+        event_id: events(:canadien).id
       }
     }
     assert_difference('Reservation.count') do
