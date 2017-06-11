@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+  has_many :reservations
+
   def self.ordered_events
     Event.all.sort_by(&:start_time)
   end
