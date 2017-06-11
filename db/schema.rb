@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170611025307) do
+ActiveRecord::Schema.define(version: 20170611025959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 20170611025307) do
   end
 
   create_table "events", id: :serial, force: :cascade do |t|
-    t.string "label"
     t.float "latitude"
     t.float "longitude"
     t.integer "range"
@@ -60,9 +59,7 @@ ActiveRecord::Schema.define(version: 20170611025307) do
     t.json "availability_info"
     t.boolean "is_available"
     t.boolean "is_complete", default: false
-    t.integer "event_id"
     t.index ["customer_id"], name: "index_parking_customer_id"
-    t.index ["event_id"], name: "index_event_id"
   end
 
   create_table "reservations", id: :serial, force: :cascade do |t|
