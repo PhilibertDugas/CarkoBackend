@@ -10,6 +10,10 @@ villeray: &villeray
   is_available: true
   availability_info: {"stop_time":"23:59","start_time":"00:00","always_available":false,"days_available":[0,0,0,0,0,0,0]}
   is_complete: true
+  multiple_photo_urls:
+    - "https://firebasestorage.googleapis.com/v0/b/carko-1475431423846.appspot.com/o/user_7_2017-01-18%2014:22:29%20%200000?alt=media&token=9063f9c3-05e2-4774-8691-9fc09f6b4d70"
+    - "https://firebasestorage.googleapis.com/v0/b/carko-1475431423846.appspot.com/o/user_7_2017-01-18%2014:22:29%20%200000?alt=media&token=9063f9c3-05e2-4774-8691-9fc09f6b4d70"
+    - "https://firebasestorage.googleapis.com/v0/b/carko-1475431423846.appspot.com/o/user_7_2017-01-18%2014:22:29%20%200000?alt=media&token=9063f9c3-05e2-4774-8691-9fc09f6b4d70"
 
 busy_parking:
   <<: *villeray
@@ -25,6 +29,13 @@ alouette_parking: &alouette
   is_available: true
   availability_info: {"stop_time":"23:59","start_time":"00:00","always_available":false,"days_available":[0,0,0,0,0,0,0]}
   is_complete: true
+  multiple_photo_urls:
+    - "https://firebasestorage.googleapis.com/v0/b/carko-1475431423846.appspot.com/o/user_9_2017-05-20%2002:22:07%20%200000?alt=media&token=cc3fe4d8-37ff-49a1-a260-94d38772f379"
+    - "https://firebasestorage.googleapis.com/v0/b/carko-1475431423846.appspot.com/o/user_9_2017-05-20%2002:22:07%20%200000?alt=media&token=cc3fe4d8-37ff-49a1-a260-94d38772f379"
+    - "https://firebasestorage.googleapis.com/v0/b/carko-1475431423846.appspot.com/o/user_9_2017-05-20%2002:22:07%20%200000?alt=media&token=cc3fe4d8-37ff-49a1-a260-94d38772f379"
+    - "https://firebasestorage.googleapis.com/v0/b/carko-1475431423846.appspot.com/o/user_9_2017-05-20%2002:22:07%20%200000?alt=media&token=cc3fe4d8-37ff-49a1-a260-94d38772f379"
+    - "https://firebasestorage.googleapis.com/v0/b/carko-1475431423846.appspot.com/o/user_9_2017-05-20%2002:22:07%20%200000?alt=media&token=cc3fe4d8-37ff-49a1-a260-94d38772f379"
+    - "https://firebasestorage.googleapis.com/v0/b/carko-1475431423846.appspot.com/o/user_9_2017-05-20%2002:22:07%20%200000?alt=media&token=cc3fe4d8-37ff-49a1-a260-94d38772f379"
 
 alouette_unavailable_on_monday:
   <<: *alouette
