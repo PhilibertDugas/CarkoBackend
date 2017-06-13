@@ -8,7 +8,7 @@ class Customer < ApplicationRecord
   end
 
   def default_account_settings
-    { managed: true }
+    { type: 'custom' }
   end
 
   def self.from_jwt_token(token)
