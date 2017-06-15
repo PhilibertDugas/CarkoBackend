@@ -27,6 +27,12 @@ class Reservation < ApplicationRecord
       save
     end
     FreeParkingJob.set(wait_until: stop_time).perform_later(self)
-    NotifyParkingRecipientNewReservationJob.perform_later(self)
+  end
+
+  private
+
+  def queue_notifications
+    RecipientNotificationJob.perform_later(self, "Congratulations, you have a new reservation on #{reservation.start_time}")
+    CustomerNotificationJob.set(wait_until: stop_time - 15.minutes).perform_later(self, "Your reservation will end in 15 minutes")
   end
 end

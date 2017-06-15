@@ -1,7 +1,7 @@
-class NotifyParkingRecipientNewReservationJob < ApplicationJob
+class RecipientNotificationJob < ApplicationJob
   queue_as :default
 
-  def perform(reservation)
+  def perform(reservation, message)
     recipient = reservation.parking.customer
     if token = recipient.token
       # TODO: This might need translations based on the user preference
