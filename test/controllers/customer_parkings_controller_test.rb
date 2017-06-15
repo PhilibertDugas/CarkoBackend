@@ -51,7 +51,8 @@ class CustomerParkingsControllerTest < ActionDispatch::IntegrationTest
         latitude: @parking.latitude,
         longitude: @parking.longitude,
         photo_url: @parking.photo_url,
-        price: @parking.price
+        price: @parking.price,
+        is_deleted: false
       }
     }, headers: auth_headers, as: :json
     assert_response 200

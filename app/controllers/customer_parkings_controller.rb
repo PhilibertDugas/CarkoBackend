@@ -48,6 +48,7 @@ class CustomerParkingsController < CustomerAreaController
       :address,
       :is_available,
       :is_complete,
+      :is_deleted,
       :multiple_photo_urls => [],
       availability_info: [:stop_time, :start_time, :always_available, days_available: []]
     )
