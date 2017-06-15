@@ -33,6 +33,7 @@ class Reservation < ApplicationRecord
 
   def queue_notifications
     RecipientNotificationJob.perform_later(self, "Congratulations, you have a new reservation on #{reservation.start_time}")
+    RecipientNotificationJob.set(wait_until: start_time - 2.hours).perform_later(self, "Reminder that you have a reservation starting in 2 hours")
     CustomerNotificationJob.set(wait_until: stop_time - 15.minutes).perform_later(self, "Your reservation will end in 15 minutes")
   end
 end
