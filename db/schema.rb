@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170612012439) do
+ActiveRecord::Schema.define(version: 20170615224813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20170612012439) do
     t.boolean "is_available"
     t.boolean "is_complete", default: false
     t.string "multiple_photo_urls", default: [], array: true
+    t.boolean "is_deleted", default: false
     t.index ["customer_id"], name: "index_parking_customer_id"
   end
 

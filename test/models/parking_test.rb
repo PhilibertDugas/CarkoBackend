@@ -14,4 +14,10 @@ class ParkingTest < ActiveSupport::TestCase
     parking = parkings(:alouette_unavailable_on_monday)
     assert_equal false, parking.available?(@monday)
   end
+
+  test "#available? returns false if the parking was deleted" do
+    parking = parkings(:alouette_parking)
+    parking.update(is_deleted: true)
+    assert_equal false, parking.available?(@monday)
+  end
 end

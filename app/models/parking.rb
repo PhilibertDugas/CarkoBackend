@@ -6,6 +6,7 @@ class Parking < ApplicationRecord
   reverse_geocoded_by :latitude, :longitude
 
   def available?(day)
+    return false if is_deleted
     day_index = convert_day_to_index(day)
     availability_info["days_available"][day_index] == 0
   end
