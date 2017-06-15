@@ -3,7 +3,7 @@ class CustomerParkingsController < CustomerAreaController
 
   def index
     @customer = Customer.find_by(id: params[:customer_id])
-    render json: @customer.parkings
+    render json: @customer.parkings.where(is_delete: false)
   end
 
   def show
