@@ -2,7 +2,7 @@ class Event < ApplicationRecord
   has_many :reservations
 
   def self.ordered_events
-    Event.all.sort_by(&:start_time)
+    Event.where("start_time > ?", Time.zone.today).sort_by(&:start_time)
   end
 
   def available_parkings
