@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170618184927) do
+ActiveRecord::Schema.define(version: 20170619192528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20170618184927) do
     t.string "bank_last_4_digits"
     t.string "bank_name"
     t.string "token"
+    t.string "display_name"
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["firebase_id"], name: "index_firebase_id"
     t.index ["vehicule_id"], name: "index_customer_vehicule_id"
