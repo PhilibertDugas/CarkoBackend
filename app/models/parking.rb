@@ -5,6 +5,10 @@ class Parking < ApplicationRecord
   geocoded_by :address
   reverse_geocoded_by :latitude, :longitude
 
+  def as_json(options = {})
+    super.merge(total_revenue: total_revenue)
+  end
+
   def available?(day)
     return false if is_deleted
     day_index = convert_day_to_index(day)

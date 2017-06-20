@@ -6,6 +6,12 @@ class CustomerParkingsControllerTest < ActionDispatch::IntegrationTest
     @customer = customers(:authenticated_customer)
   end
 
+  test "#show should return the total_revenue for the parking" do
+    get customer_parking_url(@customer, @parking), headers: auth_headers, as: :json
+    assert_response :ok
+    assert_equal 65.0, JSON.parse(body)["total_revenue"]
+  end
+
   test "should create parking" do
     assert_difference('Parking.count') do
       post customer_parkings_url(@customer), params: {
