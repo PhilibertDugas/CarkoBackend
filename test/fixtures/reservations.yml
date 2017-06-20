@@ -21,3 +21,14 @@ active_reservation:
   vehicule_id: 1
   event: canadien
   charge: 'ch_19PHtXJqqElIQmUWR5A3rihg'
+
+expired_reservation:
+  is_active: false
+  start_time: '2017-05-06 15:56'
+  stop_time: '2017-05-06 19:54'
+  parking: busy_parking
+  customer: authenticated_customer
+  total_cost: 10
+  vehicule_id: 1
+  event: canadien
+  charge: 'ch_19PHtXJqqElIQmUWR5A3rihg'

@@ -11,6 +11,10 @@ class Parking < ApplicationRecord
     availability_info["days_available"][day_index] == 0
   end
 
+  def total_revenue
+    reservations.sum(:total_cost)
+  end
+
   private
 
   def convert_day_to_index(day)
