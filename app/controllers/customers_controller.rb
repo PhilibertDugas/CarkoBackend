@@ -43,6 +43,6 @@ class CustomersController < ApplicationController
   end
 
   def customer_params
-    params.require(:customer).permit(:email, :first_name, :last_name, :display_name, :firebase_id, :token)
+    params.require(:customer).permit(:email, :first_name, :last_name, :display_name, :firebase_id, :token, :vehicule_id)
   end
 end
