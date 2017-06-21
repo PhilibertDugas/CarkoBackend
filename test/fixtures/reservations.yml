@@ -7,7 +7,6 @@ one:
   parking: villeray
   customer: authenticated_customer
   total_cost: 65
-  vehicule_id: 1
   charge: 'ch_19PHtXJqqElIQmUWR5A3rihg'
   event: canadien
 
@@ -18,7 +17,6 @@ active_reservation:
   parking: busy_parking
   customer: authenticated_customer
   total_cost: 65
-  vehicule_id: 1
   event: canadien
   charge: 'ch_19PHtXJqqElIQmUWR5A3rihg'
 
@@ -29,6 +27,5 @@ expired_reservation:
   parking: busy_parking
   customer: authenticated_customer
   total_cost: 10
-  vehicule_id: 1
   event: canadien
   charge: 'ch_19PHtXJqqElIQmUWR5A3rihg'
