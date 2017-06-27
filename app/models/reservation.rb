@@ -12,6 +12,8 @@ class Reservation < ApplicationRecord
     raise StandardError.new errors.messages unless valid?
 
     parking = Parking.find_by(id: parking_id)
+    raise StandardError.new "Parking is not available" unless parking&.is_available
+
     charge = Charge.new(
       charge_params[:amount],
       customer: charge_params[:customer],

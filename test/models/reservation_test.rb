@@ -18,9 +18,16 @@ class ReservationTest < ActiveSupport::TestCase
     @reservation.charge = nil
 
     charge_params = { amount: 10.0, currency: 'CAD' }
-    @reservation.create_charge(charge_params, parking_id: 1)
+    @reservation.create_charge(charge_params, parking_id: parkings(:villeray).id)
 
     assert_equal 'ch_19test', @reservation.charge
+  end
+
+  test '#create_charge raises an error when the parking is not available' do
+    charge_params = { amount: 10.0, currency: 'CAD' }
+    assert_raise StandardError do
+      @reservation.create_charge(charge_params, parking_id: parkings(:busy_parking).id)
+    end
   end
 
   test '#reserve_with_parking queues a free parking job' do
