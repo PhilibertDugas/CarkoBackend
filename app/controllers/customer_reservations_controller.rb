@@ -11,13 +11,17 @@ class CustomerReservationsController < CustomerAreaController
   end
 
   def create
-    @reservation = Reservation.new(reservation_params)
-    @reservation.customer = @customer
-    @reservation.create_charge(reservation_params[:charge].to_h, parking_id: reservation_params[:parking_id])
-    if @reservation.reserve_with_parking
-      render json: @reservation, status: :created
+    reservation = Reservation.new(reservation_params)
+    charge = Charge.new(
+      amount: reservation_params[:charge][:amount],
+      customer: reservation_params[:charge][:customer],
+      currency: reservation_params[:charge][:currency],
+      parking: reservation.parking,
+    )
+    if ReservationCreator.process(reservation, charge: charge)
+      render json: reservation, status: :created
     else
-      render json: @reservation.errors, status: :unprocessable_entity
+      render json: reservation.errors, status: :unprocessable_entity
     end
   end
 

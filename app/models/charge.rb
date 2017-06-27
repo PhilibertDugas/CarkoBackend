@@ -1,7 +1,7 @@
 class Charge
   attr_reader :amount, :customer, :currency, :parking
 
-  def initialize(amount, customer:, currency:, parking:)
+  def initialize(amount:, customer:, currency:, parking:)
     @amount = amount
     @customer = customer
     @currency = currency

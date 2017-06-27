@@ -21,6 +21,7 @@ class CustomerReservationsControllerTest < ActionDispatch::IntegrationTest
         stop_time: @reservation.stop_time,
         parking_id: @reservation.parking_id,
         total_cost: @reservation.total_cost,
+        customer_id: @customer.id,
         charge: { amount: 65, currency: 'CAD', customer: stripe_customer },
         event_id: events(:canadien).id
       }
