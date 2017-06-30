@@ -6,9 +6,11 @@ one:
   stop_time: '2017-06-06 19:54'
   parking: villeray
   customer: authenticated_customer
-  total_cost: 65
+  total_cost: 10
   charge: 'ch_19PHtXJqqElIQmUWR5A3rihg'
   event: canadien
+  application_fee: 2
+  customer_revenue: 8
 
 active_reservation:
   is_active: true
@@ -19,6 +21,8 @@ active_reservation:
   total_cost: 65
   event: canadien
   charge: 'ch_19PHtXJqqElIQmUWR5A3rihg'
+  application_fee: 30
+  customer_revenue: 35
 
 expired_reservation:
   is_active: false
@@ -29,3 +33,5 @@ expired_reservation:
   total_cost: 10
   event: canadien
   charge: 'ch_19PHtXJqqElIQmUWR5A3rihg'
+  application_fee: 2
+  customer_revenue: 8

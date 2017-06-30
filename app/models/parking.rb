@@ -16,7 +16,7 @@ class Parking < ApplicationRecord
   end
 
   def total_revenue
-    reservations.sum(:total_cost)
+    reservations.sum(:customer_revenue)
   end
 
   private

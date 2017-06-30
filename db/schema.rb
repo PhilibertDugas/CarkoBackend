@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170623232438) do
+ActiveRecord::Schema.define(version: 20170630231627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,8 @@ ActiveRecord::Schema.define(version: 20170623232438) do
     t.float "total_cost"
     t.string "charge"
     t.integer "event_id"
+    t.float "application_fee"
+    t.float "customer_revenue"
     t.index ["customer_id"], name: "index_customer_id"
     t.index ["event_id"], name: "index_reservation_event_id"
     t.index ["parking_id"], name: "index_parking_id"

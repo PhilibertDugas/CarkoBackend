@@ -8,12 +8,8 @@ class Charge
     @parking = parking
   end
 
-  def application_fee
+  def self.application_fee(amount)
     (0.2 * amount).round
-  end
-
-  def destination
-    parking.customer.account_id
   end
 
   def save
@@ -22,8 +18,14 @@ class Charge
       customer: customer,
       currency: currency,
       destination: destination,
-      application_fee: application_fee
+      application_fee: Charge.application_fee(amount)
     )
     stripe_charge.id
+  end
+
+  private
+
+  def destination
+    parking.customer.account_id
   end
 end

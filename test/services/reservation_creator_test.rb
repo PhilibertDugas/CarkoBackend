@@ -23,6 +23,18 @@ class ReservationCreatorTest < ActiveSupport::TestCase
     assert_equal 'ch_19test', @reservation.charge
   end
 
+  test '#process sets the application_fee and customer_revenue on the reservation' do
+    @reservation.charge = nil
+    Charge.any_instance.expects(:save).returns('ch_19test')
+
+    result = ReservationCreator.process(@reservation, charge: @charge)
+    assert_equal true, result
+    @reservation.reload
+
+    assert_equal 2.0, @reservation.application_fee
+    assert_equal 8.0, @reservation.customer_revenue
+  end
+
   test '#process returns false when the parking is not available' do
     @reservation.parking = parkings(:busy_parking)
     assert_equal false, ReservationCreator.process(@reservation, charge: @charge)
@@ -32,6 +44,15 @@ class ReservationCreatorTest < ActiveSupport::TestCase
     Charge.any_instance.expects(:save).returns('ch_19test')
 
     assert_enqueued_with(job: FreeParkingJob, args: [@reservation]) do
+      result = ReservationCreator.process(@reservation, charge: @charge)
+      assert_equal true, result
+    end
+  end
+
+  test '#process queues all the notifications when successful' do
+    Charge.any_instance.expects(:save).returns('ch_19test')
+
+    assert_enqueued_jobs 4 do
       result = ReservationCreator.process(@reservation, charge: @charge)
       assert_equal true, result
     end

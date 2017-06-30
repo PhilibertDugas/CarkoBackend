@@ -23,6 +23,6 @@ class ParkingTest < ActiveSupport::TestCase
 
   test "#total_revenue returns the sum of all reservation costs" do
     parking = parkings(:busy_parking)
-    assert_equal 75, parking.total_revenue
+    assert_equal 43, parking.total_revenue
   end
 end

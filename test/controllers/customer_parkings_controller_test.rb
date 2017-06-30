@@ -9,7 +9,7 @@ class CustomerParkingsControllerTest < ActionDispatch::IntegrationTest
   test "#show should return the total_revenue for the parking" do
     get customer_parking_url(@customer, @parking), headers: auth_headers, as: :json
     assert_response :ok
-    assert_equal 65.0, JSON.parse(body)["total_revenue"]
+    assert_equal 8.0, JSON.parse(body)["total_revenue"]
   end
 
   test "should create parking" do
