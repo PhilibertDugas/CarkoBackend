@@ -7,7 +7,7 @@ canadien:
   range: 900
   price: 20.00
   start_time: 2017-06-05 00:00:00
-  end_time: 2017-06-05 00:00:00
+  end_time: 2017-06-06 00:00:00
   photo_url: gs://carko-1475431423846.appspot.com/price.jpg
   target_audience: 10000
 
