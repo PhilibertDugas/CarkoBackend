@@ -9,15 +9,7 @@ class Charge
   end
 
   def self.application_fee(amount)
-    fee = case
-    when amount < 10
-      0.26 * amount
-    when amount >= 10 && amount < 15
-      0.24 * amount
-    when amount >= 15
-      0.23 * amount
-    end
-    fee.round(2)
+    (0.30 * amount).round(2)
   end
 
   def save
@@ -34,15 +26,7 @@ class Charge
   private
 
   def application_fee_cents
-    fee = case
-    when amount < 1000
-      0.26 * amount
-    when amount >= 1000 && amount < 1500
-      0.24 * amount
-    when amount >= 1500
-      0.23 * amount
-    end
-    fee.round
+    (0.30 * amount).round
   end
 
   def destination
