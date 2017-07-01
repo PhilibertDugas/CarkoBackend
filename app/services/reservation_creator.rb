@@ -4,8 +4,9 @@ class ReservationCreator
     return false unless reservation&.parking&.is_available
 
     reservation.charge = charge.save
-    reservation.application_fee = Charge.application_fee(charge.amount)
-    reservation.customer_revenue = reservation.total_cost - reservation.application_fee
+    application_fee = Charge.application_fee(charge.amount)
+    reservation.application_fee = application_fee
+    reservation.customer_revenue = reservation.total_cost - application_fee
 
     ActiveRecord::Base.transaction do
       reservation.parking.update!(is_available: false)

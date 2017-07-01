@@ -31,8 +31,8 @@ class ReservationCreatorTest < ActiveSupport::TestCase
     assert_equal true, result
     @reservation.reload
 
-    assert_equal 2.0, @reservation.application_fee
-    assert_equal 8.0, @reservation.customer_revenue
+    assert_equal 2.4, @reservation.application_fee
+    assert_equal 7.6, @reservation.customer_revenue
   end
 
   test '#process returns false when the parking is not available' do
