@@ -13,6 +13,7 @@ class CustomerParkingsController < CustomerAreaController
   def create
     @parking = Parking.new(parking_params)
     @parking.customer = @customer
+    @parking.parking_availability_infos = initialize_parking_availability_infos
     if @parking.save
       render json: @parking, status: :created, location: @parking
     else
@@ -34,8 +35,35 @@ class CustomerParkingsController < CustomerAreaController
 
   private
 
+  def initialize_parking_availability_infos
+    return [] unless availability_params[:parking_availability_infos].present?
+
+    infos = []
+    availability_params[:parking_availability_infos].each do |info|
+      infos.push(ParkingAvailabilityInfo.new(info))
+    end
+
+    infos
+  end
+
   def set_parking
     @parking = Parking.find(params[:id])
+  end
+
+  def availability_params
+    params.require(:parking).permit(
+      parking_availability_infos: [
+        :sunday_available,
+        :monday_available,
+        :tuesday_available,
+        :wednesday_available,
+        :thursday_available,
+        :friday_available,
+        :saturday_available,
+        :start_hour,
+        :stop_hour
+      ]
+    )
   end
 
   def parking_params

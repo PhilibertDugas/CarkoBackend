@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170806221156) do
+ActiveRecord::Schema.define(version: 20170806225405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,22 @@ ActiveRecord::Schema.define(version: 20170806221156) do
     t.string "photo_url"
     t.integer "target_audience"
     t.string "label"
+  end
+
+  create_table "parking_availability_infos", force: :cascade do |t|
+    t.boolean "sunday_available"
+    t.boolean "monday_available"
+    t.boolean "tuesday_available"
+    t.boolean "wednesday_available"
+    t.boolean "thursday_available"
+    t.boolean "friday_available"
+    t.boolean "saturday_available"
+    t.bigint "parking_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "start_hour"
+    t.string "stop_hour"
+    t.index ["parking_id"], name: "index_parking_availability_infos_on_parking_id"
   end
 
   create_table "parkings", id: :serial, force: :cascade do |t|

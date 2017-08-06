@@ -1,6 +1,7 @@
 class Parking < ApplicationRecord
   belongs_to :customer
   has_many :reservations
+  has_many :parking_availability_infos
 
   geocoded_by :address
   reverse_geocoded_by :latitude, :longitude

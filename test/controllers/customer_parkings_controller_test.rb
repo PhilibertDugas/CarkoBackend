@@ -49,6 +49,40 @@ class CustomerParkingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 3, inserted_parking.multiple_photo_urls.count
   end
 
+  test "#create should accept an array of availability infos" do
+    availability_info = {
+      sunday_available: true,
+      monday_available: false,
+      tuesday_available: false,
+      wednesday_available: false,
+      thursday_available: false,
+      friday_available: false,
+      saturday_available: false,
+      start_hour: '00:00',
+      stop_hour: '11:17',
+    }
+    assert_difference('Parking.count') do
+      post customer_parkings_url(@customer), params: {
+        parking: {
+          address: 'Super Unique Address',
+          customer_id: @parking.customer_id,
+          latitude: @parking.latitude,
+          longitude: @parking.longitude,
+          photo_url: @parking.photo_url,
+          price: @parking.price,
+          parking_availability_infos: [availability_info]
+        }
+      }, headers: auth_headers, as: :json
+    end
+
+    assert_response 201
+    inserted_parking = Parking.find_by(address: 'Super Unique Address')
+    assert_equal 1, inserted_parking.parking_availability_infos.count
+    assert_equal true, inserted_parking.parking_availability_infos.first.sunday_available
+    assert_equal '00:00', inserted_parking.parking_availability_infos.first.start_hour
+    assert_equal '11:17', inserted_parking.parking_availability_infos.first.stop_hour
+  end
+
   test "should update parking" do
     patch customer_parking_url(@customer, @parking), params: {
       parking: {
