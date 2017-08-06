@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170630231627) do
+ActiveRecord::Schema.define(version: 20170806221156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 20170630231627) do
     t.float "latitude"
     t.float "longitude"
     t.string "photo_url"
-    t.money "price", scale: 2
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -63,6 +62,7 @@ ActiveRecord::Schema.define(version: 20170630231627) do
     t.boolean "is_complete", default: false
     t.string "multiple_photo_urls", default: [], array: true
     t.boolean "is_deleted", default: false
+    t.float "price", default: 0.0
     t.index ["customer_id"], name: "index_parking_customer_id"
   end
 
