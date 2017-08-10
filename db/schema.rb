@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170806225405) do
+ActiveRecord::Schema.define(version: 20170810014622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20170806225405) do
     t.datetime "updated_at", null: false
     t.string "start_hour"
     t.string "stop_hour"
+    t.float "price"
     t.index ["parking_id"], name: "index_parking_availability_infos_on_parking_id"
   end
 
