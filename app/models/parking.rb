@@ -7,7 +7,7 @@ class Parking < ApplicationRecord
   reverse_geocoded_by :latitude, :longitude
 
   def as_json(options = {})
-    super.merge(total_revenue: total_revenue)
+    super(include: [:parking_availability_infos]).merge(total_revenue: total_revenue)
   end
 
   def available?(day)
