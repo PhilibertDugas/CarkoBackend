@@ -22,7 +22,7 @@ class CustomerParkingsController < CustomerAreaController
   end
 
   def update
-    if @parking.update(parking_params.merge(parking_availability_infos: initialize_parking_availability_infos))
+    if @parking.update(parking_params) && update_parking_availability_info
       render json: @parking
     else
       render json: @parking.errors, status: :unprocessable_entity
@@ -34,6 +34,16 @@ class CustomerParkingsController < CustomerAreaController
   end
 
   private
+
+  def update_parking_availability_info
+    return true unless availability_params[:parking_availability_infos].present?
+
+    @parking.parking_availability_infos.each do |info|
+      result = info.update(availability_params[:parking_availability_infos].first)
+    end
+
+    return result
+  end
 
   def initialize_parking_availability_infos
     return [] unless availability_params[:parking_availability_infos].present?
