@@ -40,9 +40,10 @@ class CustomerParkingsController < CustomerAreaController
 
     @parking.parking_availability_infos.each do |info|
       result = info.update(availability_params[:parking_availability_infos].first)
+      return result if result == false
     end
 
-    return result
+    true
   end
 
   def initialize_parking_availability_infos
