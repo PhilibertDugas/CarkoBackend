@@ -61,7 +61,8 @@ class CustomerParkingsController < CustomerAreaController
         :friday_available,
         :saturday_available,
         :start_hour,
-        :stop_hour
+        :stop_hour,
+        :price
       ]
     )
   end
