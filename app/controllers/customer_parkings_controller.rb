@@ -22,7 +22,7 @@ class CustomerParkingsController < CustomerAreaController
   end
 
   def update
-    if @parking.update(parking_params)
+    if @parking.update(parking_params.merge(parking_availability_infos: initialize_parking_availability_infos))
       render json: @parking
     else
       render json: @parking.errors, status: :unprocessable_entity
