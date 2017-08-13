@@ -98,6 +98,41 @@ class CustomerParkingsControllerTest < ActionDispatch::IntegrationTest
     assert_response 200
   end
 
+  test "update accepts an array of parking availability info" do
+    patch customer_parking_url(@customer, @parking), params: {
+      parking: {
+        parking_availability_infos: [
+          {
+            sunday_available: true,
+            monday_available: true,
+            tuesday_available: false,
+            wednesday_available: false,
+            thursday_available: false,
+            friday_available: false,
+            saturday_available: true,
+            start_hour: "00:01",
+            stop_hour: "01:00",
+            price: 2.00
+          }
+        ]
+      }
+    }, headers: auth_headers, as: :json
+    assert_response 200
+
+    @parking.reload
+    info = @parking.parking_availability_infos.first
+    assert_equal true, info.sunday_available
+    assert_equal true, info.monday_available
+    assert_equal false, info.tuesday_available
+    assert_equal false, info.wednesday_available
+    assert_equal false, info.thursday_available
+    assert_equal false, info.friday_available
+    assert_equal true, info.saturday_available
+    assert_equal "00:01", info.start_hour
+    assert_equal "01:00", info.stop_hour
+    assert_equal 2.00, info.price
+  end
+
   test "should destroy parking" do
     assert_difference('Parking.count', -1) do
       delete customer_parking_url(@customer, @parking), headers: auth_headers, as: :json

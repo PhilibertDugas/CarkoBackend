@@ -38,12 +38,14 @@ class CustomerParkingsController < CustomerAreaController
   def update_parking_availability_info
     return true unless availability_params[:parking_availability_infos].present?
 
-    @parking.parking_availability_infos.each do |info|
-      result = info.update(availability_params[:parking_availability_infos].first)
-      return result if result == false
+    if @parking.parking_availability_infos.present?
+      @parking.parking_availability_infos.each do |info|
+        result = info.update(availability_params[:parking_availability_infos].first)
+        return result if result == false
+      end
+    else
+      @parking.parking_availability_infos = initialize_parking_availability_infos
     end
-
-    true
   end
 
   def initialize_parking_availability_infos
